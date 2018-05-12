@@ -1,5 +1,6 @@
 #[macro_use]
 extern crate activitystreams_derive;
+extern crate chrono;
 #[macro_use]
 extern crate failure;
 extern crate mime;

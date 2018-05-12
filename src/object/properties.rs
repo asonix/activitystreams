@@ -1,3 +1,4 @@
+use chrono::{offset::Utc, DateTime};
 use mime;
 use serde_json::{self, Value};
 
@@ -38,7 +39,6 @@ pub struct ObjectProperties {
     #[activitystreams(concrete(String))]
     name: Option<serde_json::Value>,
 
-    // TODO: DateTime<Utc>
     #[serde(skip_serializing_if = "Option::is_none")]
     #[activitystreams(concrete(String), functional)]
     end_time: Option<serde_json::Value>,
@@ -67,7 +67,6 @@ pub struct ObjectProperties {
     #[activitystreams(ab(Object, Link))]
     preview: Option<serde_json::Value>,
 
-    // TODO: DateTime<Utc>
     #[serde(skip_serializing_if = "Option::is_none")]
     #[activitystreams(concrete(String), functional)]
     published: Option<serde_json::Value>,
@@ -76,7 +75,6 @@ pub struct ObjectProperties {
     #[activitystreams(concrete(Collection), functional)]
     replies: Option<serde_json::Value>,
 
-    // TODO: DateTime<Utc>
     #[serde(skip_serializing_if = "Option::is_none")]
     #[activitystreams(concrete(String), functional)]
     start_time: Option<serde_json::Value>,
@@ -89,7 +87,6 @@ pub struct ObjectProperties {
     #[activitystreams(ab(Object, Link))]
     tag: Option<serde_json::Value>,
 
-    // TODO: DateTime<Utc>
     #[serde(skip_serializing_if = "Option::is_none")]
     #[activitystreams(concrete(String), functional)]
     updated: Option<serde_json::Value>,
@@ -114,7 +111,6 @@ pub struct ObjectProperties {
     #[activitystreams(ab(Object, Link))]
     bcc: Option<serde_json::Value>,
 
-    // TODO: mime
     #[serde(skip_serializing_if = "Option::is_none")]
     #[activitystreams(concrete(String), functional)]
     media_type: Option<serde_json::Value>,
@@ -128,6 +124,26 @@ pub struct ObjectProperties {
 impl ObjectProperties {
     pub fn media_type(&self) -> Result<mime::Mime> {
         self.media_type_string()
+            .and_then(|s| s.parse().map_err(|_| Error::Deserialize))
+    }
+
+    pub fn end_time(&self) -> Result<DateTime<Utc>> {
+        self.end_time_string()
+            .and_then(|s| s.parse().map_err(|_| Error::Deserialize))
+    }
+
+    pub fn published(&self) -> Result<DateTime<Utc>> {
+        self.published_string()
+            .and_then(|s| s.parse().map_err(|_| Error::Deserialize))
+    }
+
+    pub fn start_time(&self) -> Result<DateTime<Utc>> {
+        self.start_time_string()
+            .and_then(|s| s.parse().map_err(|_| Error::Deserialize))
+    }
+
+    pub fn updated(&self) -> Result<DateTime<Utc>> {
+        self.updated_string()
             .and_then(|s| s.parse().map_err(|_| Error::Deserialize))
     }
 }
@@ -163,8 +179,14 @@ pub struct TombstoneProperties {
     #[activitystreams(concrete(String))]
     former_type: Option<serde_json::Value>,
 
-    // TODO: DateTime<Utc>
     #[serde(skip_serializing_if = "Option::is_none")]
     #[activitystreams(concrete(String), functional)]
     deleted: Option<serde_json::Value>,
+}
+
+impl TombstoneProperties {
+    pub fn deleted(&self) -> Result<DateTime<Utc>> {
+        self.deleted_string()
+            .and_then(|s| s.parse().map_err(|_| Error::Deserialize))
+    }
 }

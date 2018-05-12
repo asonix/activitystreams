@@ -5,6 +5,7 @@ authors = ["asonix <asonix.dev@gmail.com>"]
 
 [dependencies]
 activitystreams-derive = { version = "0.1", path = "activitystreams-derive" }
+chrono = { version = "0.4", features = ["serde"] }
 failure = "0.1"
 mime = "0.3"
 serde = "1.0"
