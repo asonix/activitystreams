@@ -1,7 +1,7 @@
 use serde_json;
 
 use super::{kind::LeaveType, properties::ActivityProperties, Activity};
-use base::Base;
+
 use error::{Error, Result};
 use link::Link;
 use object::{Object, ObjectProperties};
@@ -45,6 +45,5 @@ impl Leave {
     }
 }
 
-impl Base for Leave {}
 impl Object for Leave {}
 impl Activity for Leave {}

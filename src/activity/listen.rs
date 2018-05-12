@@ -1,7 +1,7 @@
 use serde_json;
 
 use super::{kind::ListenType, properties::ActivityProperties, Activity};
-use base::Base;
+
 use error::{Error, Result};
 use link::Link;
 use object::{Object, ObjectProperties};
@@ -45,6 +45,5 @@ impl Listen {
     }
 }
 
-impl Base for Listen {}
 impl Object for Listen {}
 impl Activity for Listen {}

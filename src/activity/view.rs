@@ -1,7 +1,7 @@
 use serde_json;
 
 use super::{kind::ViewType, properties::ActivityProperties, Activity};
-use base::Base;
+
 use error::{Error, Result};
 use link::Link;
 use object::{Object, ObjectProperties};
@@ -45,6 +45,5 @@ impl View {
     }
 }
 
-impl Base for View {}
 impl Object for View {}
 impl Activity for View {}

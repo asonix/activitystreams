@@ -2,7 +2,7 @@ use serde::de::DeserializeOwned;
 use serde_json;
 
 use super::{kind::QuestionType, properties::ActivityProperties, Activity, IntransitiveActivity};
-use base::Base;
+
 use error::{Error, Result};
 use link::Link;
 use object::{Object, ObjectProperties};
@@ -61,7 +61,6 @@ fn vec_item<D: DeserializeOwned>(v: &Option<Vec<serde_json::Value>>) -> Result<V
     }
 }
 
-impl Base for Question {}
 impl Object for Question {}
 impl Activity for Question {}
 impl IntransitiveActivity for Question {}

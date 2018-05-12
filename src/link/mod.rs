@@ -1,11 +1,11 @@
-use base::Base;
+use serde::{de::DeserializeOwned, ser::Serialize};
 
 mod kind;
 mod properties;
 pub use self::kind::*;
 pub use self::properties::*;
 
-pub trait Link: Base {}
+pub trait Link: DeserializeOwned + Serialize {}
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -16,5 +16,4 @@ pub struct Mention {
     pub link_props: LinkProperties,
 }
 
-impl Base for Mention {}
 impl Link for Mention {}

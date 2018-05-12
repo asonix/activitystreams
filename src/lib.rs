@@ -33,5 +33,4 @@ pub mod base;
 pub mod collection;
 pub mod error;
 pub mod link;
-pub mod location;
 pub mod object;

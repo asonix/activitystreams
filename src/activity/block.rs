@@ -1,7 +1,7 @@
 use serde_json;
 
 use super::{kind::BlockType, properties::ActivityProperties, Activity};
-use base::Base;
+
 use error::{Error, Result};
 use link::Link;
 use object::{Object, ObjectProperties};
@@ -45,6 +45,5 @@ impl Block {
     }
 }
 
-impl Base for Block {}
 impl Object for Block {}
 impl Activity for Block {}

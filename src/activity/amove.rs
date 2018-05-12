@@ -1,7 +1,7 @@
 use serde_json;
 
 use super::{kind::MoveType, properties::ActivityProperties, Activity};
-use base::Base;
+
 use error::{Error, Result};
 use link::Link;
 use object::{Object, ObjectProperties};
@@ -84,6 +84,5 @@ impl AMove {
     }
 }
 
-impl Base for AMove {}
 impl Object for AMove {}
 impl Activity for AMove {}

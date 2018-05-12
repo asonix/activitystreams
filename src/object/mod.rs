@@ -1,6 +1,6 @@
+use serde::{de::DeserializeOwned, ser::Serialize};
 use serde_json;
 
-use base::Base;
 use error::{Error, Result};
 use link::Link;
 
@@ -9,7 +9,7 @@ mod properties;
 pub use self::kind::*;
 pub use self::properties::*;
 
-pub trait Object: Base {}
+pub trait Object: DeserializeOwned + Serialize {}
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -20,7 +20,6 @@ pub struct Article {
     pub object_props: ObjectProperties,
 }
 
-impl Base for Article {}
 impl Object for Article {}
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
@@ -32,7 +31,6 @@ pub struct Audio {
     pub object_props: ObjectProperties,
 }
 
-impl Base for Audio {}
 impl Object for Audio {}
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
@@ -44,7 +42,6 @@ pub struct Document {
     pub object_props: ObjectProperties,
 }
 
-impl Base for Document {}
 impl Object for Document {}
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
@@ -56,7 +53,6 @@ pub struct Event {
     pub object_props: ObjectProperties,
 }
 
-impl Base for Event {}
 impl Object for Event {}
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
@@ -68,7 +64,6 @@ pub struct Image {
     pub object_props: ObjectProperties,
 }
 
-impl Base for Image {}
 impl Object for Image {}
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
@@ -80,7 +75,6 @@ pub struct Note {
     pub object_props: ObjectProperties,
 }
 
-impl Base for Note {}
 impl Object for Note {}
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
@@ -92,7 +86,6 @@ pub struct Page {
     pub object_props: ObjectProperties,
 }
 
-impl Base for Page {}
 impl Object for Page {}
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
@@ -106,7 +99,6 @@ pub struct Place {
     pub place: PlaceProperties,
 }
 
-impl Base for Place {}
 impl Object for Place {}
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
@@ -125,7 +117,6 @@ impl Profile {
     }
 }
 
-impl Base for Profile {}
 impl Object for Profile {}
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
@@ -166,7 +157,6 @@ impl Relationship {
     }
 }
 
-impl Base for Relationship {}
 impl Object for Relationship {}
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
@@ -180,7 +170,6 @@ pub struct Tombstone {
     pub tombstone_props: TombstoneProperties,
 }
 
-impl Base for Tombstone {}
 impl Object for Tombstone {}
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
@@ -192,5 +181,4 @@ pub struct Video {
     pub object_props: ObjectProperties,
 }
 
-impl Base for Video {}
 impl Object for Video {}

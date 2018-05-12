@@ -1,7 +1,7 @@
 use serde_json;
 
 use super::{kind::ArriveType, properties::ActivityProperties, Activity, IntransitiveActivity};
-use base::Base;
+
 use error::{Error, Result};
 use link::Link;
 use object::{Object, ObjectProperties};
@@ -70,7 +70,6 @@ impl Arrive {
     }
 }
 
-impl Base for Arrive {}
 impl Object for Arrive {}
 impl Activity for Arrive {}
 impl IntransitiveActivity for Arrive {}

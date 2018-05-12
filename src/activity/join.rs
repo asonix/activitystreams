@@ -1,7 +1,7 @@
 use serde_json;
 
 use super::{kind::JoinType, properties::ActivityProperties, Activity};
-use base::Base;
+
 use error::{Error, Result};
 use link::Link;
 use object::{Object, ObjectProperties};
@@ -45,6 +45,5 @@ impl Join {
     }
 }
 
-impl Base for Join {}
 impl Object for Join {}
 impl Activity for Join {}

@@ -1,7 +1,7 @@
 use serde_json;
 
 use super::{kind::LikeType, properties::ActivityProperties, Activity};
-use base::Base;
+
 use error::{Error, Result};
 use link::Link;
 use object::{Object, ObjectProperties};
@@ -45,6 +45,5 @@ impl Like {
     }
 }
 
-impl Base for Like {}
 impl Object for Like {}
 impl Activity for Like {}

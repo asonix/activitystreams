@@ -1,7 +1,7 @@
 use serde_json;
 
 use super::{kind::UpdateType, properties::ActivityProperties, Activity};
-use base::Base;
+
 use error::{Error, Result};
 use link::Link;
 use object::{Object, ObjectProperties};
@@ -45,6 +45,5 @@ impl Update {
     }
 }
 
-impl Base for Update {}
 impl Object for Update {}
 impl Activity for Update {}

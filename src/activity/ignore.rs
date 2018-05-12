@@ -1,7 +1,7 @@
 use serde_json;
 
 use super::{kind::IgnoreType, properties::ActivityProperties, Activity};
-use base::Base;
+
 use error::{Error, Result};
 use link::Link;
 use object::{Object, ObjectProperties};
@@ -45,6 +45,5 @@ impl Ignore {
     }
 }
 
-impl Base for Ignore {}
 impl Object for Ignore {}
 impl Activity for Ignore {}

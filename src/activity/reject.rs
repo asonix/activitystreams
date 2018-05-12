@@ -1,7 +1,7 @@
 use serde_json;
 
 use super::{kind::RejectType, properties::ActivityProperties, Activity};
-use base::Base;
+
 use error::{Error, Result};
 use link::Link;
 use object::{Object, ObjectProperties};
@@ -45,6 +45,5 @@ impl Reject {
     }
 }
 
-impl Base for Reject {}
 impl Object for Reject {}
 impl Activity for Reject {}

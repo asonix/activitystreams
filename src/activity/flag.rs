@@ -1,7 +1,7 @@
 use serde_json;
 
 use super::{kind::FlagType, properties::ActivityProperties, Activity};
-use base::Base;
+
 use error::{Error, Result};
 use link::Link;
 use object::{Object, ObjectProperties};
@@ -45,6 +45,5 @@ impl Flag {
     }
 }
 
-impl Base for Flag {}
 impl Object for Flag {}
 impl Activity for Flag {}

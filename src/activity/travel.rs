@@ -1,7 +1,7 @@
 use serde_json;
 
 use super::{kind::TravelType, properties::ActivityProperties, Activity, IntransitiveActivity};
-use base::Base;
+
 use error::{Error, Result};
 use link::Link;
 use object::{Object, ObjectProperties};
@@ -75,7 +75,6 @@ impl Travel {
     }
 }
 
-impl Base for Travel {}
 impl Object for Travel {}
 impl Activity for Travel {}
 impl IntransitiveActivity for Travel {}

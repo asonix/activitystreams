@@ -1,7 +1,7 @@
 use serde_json;
 
 use super::{kind::ReadType, properties::ActivityProperties, Activity};
-use base::Base;
+
 use error::{Error, Result};
 use link::Link;
 use object::{Object, ObjectProperties};
@@ -45,6 +45,5 @@ impl Read {
     }
 }
 
-impl Base for Read {}
 impl Object for Read {}
 impl Activity for Read {}

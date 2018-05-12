@@ -1,7 +1,7 @@
 use serde_json;
 
 use super::{kind::FollowType, properties::ActivityProperties, Activity};
-use base::Base;
+
 use error::{Error, Result};
 use link::Link;
 use object::{Object, ObjectProperties};
@@ -45,6 +45,5 @@ impl Follow {
     }
 }
 
-impl Base for Follow {}
 impl Object for Follow {}
 impl Activity for Follow {}

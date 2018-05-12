@@ -1,7 +1,7 @@
 use serde_json;
 
 use super::{kind::AnnounceType, properties::ActivityProperties, Activity};
-use base::Base;
+
 use error::{Error, Result};
 use link::Link;
 use object::{Object, ObjectProperties};
@@ -66,6 +66,5 @@ impl Announce {
     }
 }
 
-impl Base for Announce {}
 impl Object for Announce {}
 impl Activity for Announce {}

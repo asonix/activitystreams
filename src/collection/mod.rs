@@ -1,6 +1,5 @@
 use serde_json;
 
-use base::Base;
 use object::Object;
 
 mod kind;
@@ -20,7 +19,6 @@ pub struct Collection {
     pub collection_props: CollectionProperties,
 }
 
-impl Base for Collection {}
 impl Object for Collection {}
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
@@ -35,7 +33,6 @@ pub struct OrderedCollection {
     pub collection_props: CollectionProperties,
 }
 
-impl Base for OrderedCollection {}
 impl Object for OrderedCollection {}
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
@@ -52,7 +49,6 @@ pub struct CollectionPage {
     pub collection_page_props: CollectionPageProperties,
 }
 
-impl Base for CollectionPage {}
 impl Object for CollectionPage {}
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
@@ -71,5 +67,4 @@ pub struct OrderedCollectionPage {
     pub ordered_collection_page_props: OrderedCollectionPageProperties,
 }
 
-impl Base for OrderedCollectionPage {}
 impl Object for OrderedCollectionPage {}

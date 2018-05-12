@@ -1,7 +1,7 @@
 use serde_json;
 
 use super::{kind::TentativeAcceptType, properties::ActivityProperties, Activity};
-use base::Base;
+
 use error::{Error, Result};
 use link::Link;
 use object::{Object, ObjectProperties};
@@ -45,6 +45,5 @@ impl TentativeAccept {
     }
 }
 
-impl Base for TentativeAccept {}
 impl Object for TentativeAccept {}
 impl Activity for TentativeAccept {}

@@ -1,7 +1,7 @@
 use serde_json;
 
 use super::{kind::InviteType, properties::ActivityProperties, Activity};
-use base::Base;
+
 use error::{Error, Result};
 use link::Link;
 use object::{Object, ObjectProperties};
@@ -62,6 +62,5 @@ impl Invite {
     }
 }
 
-impl Base for Invite {}
 impl Object for Invite {}
 impl Activity for Invite {}

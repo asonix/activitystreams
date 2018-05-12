@@ -1,7 +1,7 @@
 use serde_json;
 
 use super::{kind::DeleteType, properties::ActivityProperties, Activity};
-use base::Base;
+
 use error::{Error, Result};
 use link::Link;
 use object::{Object, ObjectProperties};
@@ -66,6 +66,5 @@ impl Delete {
     }
 }
 
-impl Base for Delete {}
 impl Object for Delete {}
 impl Activity for Delete {}

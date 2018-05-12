@@ -1,7 +1,7 @@
 use serde_json;
 
 use super::{kind::CreateType, properties::ActivityProperties, Activity};
-use base::Base;
+
 use error::{Error, Result};
 use link::Link;
 use object::{Object, ObjectProperties};
@@ -45,6 +45,5 @@ impl Create {
     }
 }
 
-impl Base for Create {}
 impl Object for Create {}
 impl Activity for Create {}

@@ -1,7 +1,7 @@
 use serde_json;
 
 use super::{kind::UndoType, properties::ActivityProperties, Activity};
-use base::Base;
+
 use error::{Error, Result};
 use link::Link;
 use object::{Object, ObjectProperties};
@@ -45,6 +45,5 @@ impl Undo {
     }
 }
 
-impl Base for Undo {}
 impl Object for Undo {}
 impl Activity for Undo {}

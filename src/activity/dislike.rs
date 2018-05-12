@@ -1,7 +1,7 @@
 use serde_json;
 
 use super::{kind::DislikeType, properties::ActivityProperties, Activity};
-use base::Base;
+
 use error::{Error, Result};
 use link::Link;
 use object::{Object, ObjectProperties};
@@ -45,6 +45,5 @@ impl Dislike {
     }
 }
 
-impl Base for Dislike {}
 impl Object for Dislike {}
 impl Activity for Dislike {}

@@ -1,4 +1,3 @@
-use base::Base;
 use object::{Object, ObjectProperties};
 
 mod kind;
@@ -15,7 +14,6 @@ pub struct Appliation {
     pub object_props: ObjectProperties,
 }
 
-impl Base for Appliation {}
 impl Object for Appliation {}
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
@@ -27,7 +25,6 @@ pub struct Group {
     pub object_props: ObjectProperties,
 }
 
-impl Base for Group {}
 impl Object for Group {}
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
@@ -39,7 +36,6 @@ pub struct Organization {
     pub object_props: ObjectProperties,
 }
 
-impl Base for Organization {}
 impl Object for Organization {}
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
@@ -51,7 +47,6 @@ pub struct Person {
     pub object_props: ObjectProperties,
 }
 
-impl Base for Person {}
 impl Object for Person {}
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
@@ -63,5 +58,4 @@ pub struct Service {
     pub object_props: ObjectProperties,
 }
 
-impl Base for Service {}
 impl Object for Service {}

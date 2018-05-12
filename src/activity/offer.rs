@@ -1,7 +1,7 @@
 use serde_json;
 
 use super::{kind::OfferType, properties::ActivityProperties, Activity};
-use base::Base;
+
 use error::{Error, Result};
 use link::Link;
 use object::{Object, ObjectProperties};
@@ -66,6 +66,5 @@ impl Offer {
     }
 }
 
-impl Base for Offer {}
 impl Object for Offer {}
 impl Activity for Offer {}
