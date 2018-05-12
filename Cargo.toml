@@ -1,9 +1,10 @@
 [package]
-name = "activitypub"
+name = "activitystreams"
 version = "0.1.0"
 authors = ["asonix <asonix.dev@gmail.com>"]
 
 [dependencies]
+activitystreams-derive = { version = "0.1", path = "activitystreams-derive" }
 failure = "0.1"
 mime = "0.3"
 serde = "1.0"

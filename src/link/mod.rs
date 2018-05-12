@@ -12,6 +12,7 @@ pub trait Link: DeserializeOwned + Serialize {}
 pub struct Mention {
     #[serde(rename = "type")]
     kind: MentionType,
+
     #[serde(flatten)]
     pub link_props: LinkProperties,
 }

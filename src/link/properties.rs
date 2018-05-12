@@ -6,70 +6,50 @@ use link::Link;
 use object::Object;
 use Properties;
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Properties)]
 #[serde(rename_all = "camelCase")]
 pub struct LinkProperties {
+    #[serde(skip_serializing_if = "Option::is_none")]
+    #[activitystreams(concrete(String), functional)]
     id: Option<serde_json::Value>,
+
+    #[serde(skip_serializing_if = "Option::is_none")]
+    #[activitystreams(concrete(String), functional)]
     href: Option<serde_json::Value>,
+
+    #[serde(skip_serializing_if = "Option::is_none")]
+    #[activitystreams(concrete(String))]
     rel: Option<serde_json::Value>,
+
+    #[serde(skip_serializing_if = "Option::is_none")]
+    #[activitystreams(concrete(String), functional)]
     media_type: Option<serde_json::Value>,
+
+    #[serde(skip_serializing_if = "Option::is_none")]
+    #[activitystreams(concrete(String))]
     name: Option<serde_json::Value>,
+
+    // TODO: Lang enum
+    #[serde(skip_serializing_if = "Option::is_none")]
+    #[activitystreams(concrete(String), functional)]
     hreflang: Option<serde_json::Value>,
+
+    #[serde(skip_serializing_if = "Option::is_none")]
+    #[activitystreams(concrete(u64), functional)]
     height: Option<serde_json::Value>,
+
+    #[serde(skip_serializing_if = "Option::is_none")]
+    #[activitystreams(concrete(u64), functional)]
     width: Option<serde_json::Value>,
+
+    #[serde(skip_serializing_if = "Option::is_none")]
+    #[activitystreams(ab(Object, Link))]
     preview: Option<serde_json::Value>,
 }
 
-impl Properties for LinkProperties {}
-
 impl LinkProperties {
-    pub fn id(&self) -> Result<String> {
-        self.get_item(|l| &l.id)
-    }
-
-    pub fn href(&self) -> Result<String> {
-        self.get_item(|l| &l.href)
-    }
-
-    pub fn rel(&self) -> Result<String> {
-        self.get_item(|l| &l.rel)
-    }
-
-    pub fn rels(&self) -> Result<Vec<String>> {
-        self.get_item(|l| &l.rel)
-    }
-
     pub fn media_type(&self) -> Result<mime::Mime> {
-        self.get_item::<_, String>(|l| &l.media_type)
+        self.media_type_string()
             .and_then(|s| s.parse().map_err(|_| Error::Deserialize))
-    }
-
-    pub fn name(&self) -> Result<String> {
-        self.get_item(|l| &l.name)
-    }
-
-    pub fn names(&self) -> Result<Vec<String>> {
-        self.get_item(|l| &l.name)
-    }
-
-    // TODO: Lang enum
-    pub fn hreflang(&self) -> Result<String> {
-        self.get_item(|l| &l.hreflang)
-    }
-
-    pub fn height(&self) -> Result<u64> {
-        self.get_item(|l| &l.height)
-    }
-
-    pub fn width(&self) -> Result<u64> {
-        self.get_item(|l| &l.width)
-    }
-
-    pub fn preview<O: Object>(&self) -> Result<O> {
-        self.get_item(|l| &l.preview)
-    }
-
-    pub fn preview_link<L: Link>(&self) -> Result<L> {
-        self.get_item(|l| &l.preview)
     }
 }

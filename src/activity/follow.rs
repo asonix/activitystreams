@@ -2,47 +2,28 @@ use serde_json;
 
 use super::{kind::FollowType, properties::ActivityProperties, Activity};
 
-use error::{Error, Result};
+use error::Result;
 use link::Link;
 use object::{Object, ObjectProperties};
+use Properties;
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize, Serialize, Properties)]
 #[serde(rename_all = "camelCase")]
 pub struct Follow {
     #[serde(rename = "type")]
     kind: FollowType,
+
+    #[activitystreams(ab(Object, Link))]
     actor: serde_json::Value,
+
+    #[activitystreams(ab(Object, Link))]
     object: serde_json::Value,
+
     #[serde(flatten)]
     pub object_props: ObjectProperties,
+
     #[serde(flatten)]
     pub activity_props: ActivityProperties,
-}
-
-impl Follow {
-    pub fn actor<O: Object>(&self) -> Result<O> {
-        serde_json::from_value(self.actor.clone()).map_err(|_| Error::Deserialize)
-    }
-
-    pub fn actors<O: Object>(&self) -> Result<Vec<O>> {
-        serde_json::from_value(self.actor.clone()).map_err(|_| Error::Deserialize)
-    }
-
-    pub fn actor_link<L: Link>(&self) -> Result<L> {
-        serde_json::from_value(self.actor.clone()).map_err(|_| Error::Deserialize)
-    }
-
-    pub fn actor_links<L: Link>(&self) -> Result<Vec<L>> {
-        serde_json::from_value(self.actor.clone()).map_err(|_| Error::Deserialize)
-    }
-
-    pub fn object<O: Object>(&self) -> Result<O> {
-        serde_json::from_value(self.object.clone()).map_err(|_| Error::Deserialize)
-    }
-
-    pub fn objects<O: Object>(&self) -> Result<Vec<O>> {
-        serde_json::from_value(self.object.clone()).map_err(|_| Error::Deserialize)
-    }
 }
 
 impl Object for Follow {}

@@ -10,6 +10,7 @@ pub trait Actor: Object {}
 pub struct Appliation {
     #[serde(rename = "type")]
     kind: ApplicationType,
+
     #[serde(flatten)]
     pub object_props: ObjectProperties,
 }
@@ -21,6 +22,7 @@ impl Object for Appliation {}
 pub struct Group {
     #[serde(rename = "type")]
     kind: GroupType,
+
     #[serde(flatten)]
     pub object_props: ObjectProperties,
 }
@@ -32,6 +34,7 @@ impl Object for Group {}
 pub struct Organization {
     #[serde(rename = "type")]
     kind: OrganizationType,
+
     #[serde(flatten)]
     pub object_props: ObjectProperties,
 }
@@ -43,6 +46,7 @@ impl Object for Organization {}
 pub struct Person {
     #[serde(rename = "type")]
     kind: PersonType,
+
     #[serde(flatten)]
     pub object_props: ObjectProperties,
 }
@@ -54,6 +58,7 @@ impl Object for Person {}
 pub struct Service {
     #[serde(rename = "type")]
     kind: ServiceType,
+
     #[serde(flatten)]
     pub object_props: ObjectProperties,
 }

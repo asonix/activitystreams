@@ -1,0 +1,12 @@
+[package]
+name = "activitystreams-derive"
+version = "0.1.0"
+authors = ["asonix <asonix.dev@gmail.com>"]
+
+[dependencies]
+quote = "0.5"
+syn = "0.13"
+proc-macro2 = "0.3"
+
+[lib]
+proc-macro = true
