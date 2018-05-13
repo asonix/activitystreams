@@ -22,7 +22,7 @@ use serde_json;
 use super::{kind::DislikeType, properties::ActivityProperties, Activity};
 
 use link::Link;
-use object::{Object, ObjectProperties};
+use object::{properties::ObjectProperties, Object};
 
 #[derive(Clone, Debug, Default, Deserialize, Serialize, Properties)]
 #[serde(rename_all = "camelCase")]

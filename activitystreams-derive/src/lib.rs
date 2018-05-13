@@ -87,7 +87,7 @@ pub fn unit_string(input: TokenStream) -> TokenStream {
     };
 
     let visitor = quote! {
-        pub struct #visitor_name;
+        struct #visitor_name;
 
         impl<'de> Visitor<'de> for #visitor_name {
             type Value = #name;
@@ -222,138 +222,297 @@ pub fn properties_derive(input: TokenStream) -> TokenStream {
                     let set_fn_plural = Ident::from(format!("set_{}_{}_vec", ident, lower_variant));
                     let variant = Ident::from(variant);
 
-                    if is_concrete && is_option {
-                        let single = quote! {
-                            pub fn #fn_name(&self) -> ::error::Result<#variant> {
-                                ::properties::from_item(&self.#ident)
-                            }
-
-                            pub fn #set_fn_name(&mut self, item: #variant) -> ::error::Result<()> {
-                                self.#ident = ::properties::to_item(item)?;
-                                Ok(())
-                            }
-                        };
-
-                        if is_functional {
-                            single
-                        } else {
-                            quote! {
-                                #single
-
-                                pub fn #fn_plural(&self) -> ::error::Result<Vec<#variant>> {
+                    if is_concrete {
+                        if is_option {
+                            let single = quote! {
+                                /// Retrieve a value from the given struct
+                                ///
+                                /// This method deserializes the item from JSON, so be wary of using
+                                /// this a lot.
+                                ///
+                                /// Possible errors from this method are `Error::NotFound` and
+                                /// `Error::Deserialize`
+                                pub fn #fn_name(&self) -> ::error::Result<#variant> {
                                     ::properties::from_item(&self.#ident)
                                 }
 
-                                pub fn #set_fn_plural(&mut self, item: Vec<#variant>) -> ::error::Result<()> {
+                                /// Set a value in the given struct
+                                ///
+                                /// This method serializes the item to JSON, so be wary of using this a
+                                /// lot.
+                                ///
+                                /// Possible errors from this method are `Error::Serialize`
+                                pub fn #set_fn_name(&mut self, item: #variant) -> ::error::Result<()> {
                                     self.#ident = ::properties::to_item(item)?;
                                     Ok(())
                                 }
-                            }
-                        }
-                    } else if is_concrete && is_vec {
-                        quote! {
-                            pub fn #fn_name(&self) -> ::error::Result<Vec<#variant>> {
-                                ::properties::from_vec(&self.#ident)
-                            }
+                            };
 
-                            pub fn #set_fn_name(&mut self, item: Vec<#variant>>) -> ::error::Result<()> {
-                                self.#ident = ::properties::to_vec(item)?;
-                                Ok(())
-                            }
-                        }
-                    } else if is_concrete {
-                        let single = quote! {
-                            pub fn #fn_name(&self) -> ::error::Result<#variant> {
-                                ::properties::from_value(&self.#ident)
-                            }
+                            if is_functional {
+                                single
+                            } else {
+                                quote! {
+                                    #single
 
-                            pub fn #set_fn_name(&mut self, item: #variant) -> ::error::Result<()> {
-                                self.#ident = ::properties::to_value(item)?;
-                                Ok(())
-                            }
-                        };
+                                    /// Retrieve many values from the given struct
+                                    ///
+                                    /// This method deserializes the item from JSON, so be wary of using
+                                    /// this a lot.
+                                    ///
+                                    /// Possible errors from this method are `Error::NotFound` and
+                                    /// `Error::Deserialize`
+                                    pub fn #fn_plural(&self) -> ::error::Result<Vec<#variant>> {
+                                        ::properties::from_item(&self.#ident)
+                                    }
 
-                        if is_functional {
-                            single
-                        } else {
+                                    /// Set many values in the given struct
+                                    ///
+                                    /// This method serializes the item to JSON, so be wary of using
+                                    /// this a lot.
+                                    ///
+                                    /// Possible errors from this method are `Error::Serialize`
+                                    pub fn #set_fn_plural(&mut self, item: Vec<#variant>) -> ::error::Result<()> {
+                                        self.#ident = ::properties::to_item(item)?;
+                                        Ok(())
+                                    }
+                                }
+                            }
+                        } else if is_vec {
                             quote! {
-                                #single
+                                /// Retrieve many values from the given struct
+                                ///
+                                /// This method deserializes the item from JSON, so be wary of using
+                                /// this a lot.
+                                ///
+                                /// Possible errors from this method are `Error::Deserialize`
+                                pub fn #fn_name(&self) -> ::error::Result<Vec<#variant>> {
+                                    ::properties::from_vec(&self.#ident)
+                                }
 
-                                pub fn #fn_plural(&self) -> ::error::Result<Vec<#variant>> {
+                                /// Set many values in the given struct
+                                ///
+                                /// This method serializes the item to JSON, so be wary of using
+                                /// this a lot.
+                                ///
+                                /// Possible errors from this method are `Error::Serialize`
+                                pub fn #set_fn_name(&mut self, item: Vec<#variant>>) -> ::error::Result<()> {
+                                    self.#ident = ::properties::to_vec(item)?;
+                                    Ok(())
+                                }
+                            }
+                        } else {
+                            let single = quote! {
+                                /// Retrieve a value from the given struct
+                                ///
+                                /// This method deserializes the item from JSON, so be wary of using
+                                /// this a lot.
+                                ///
+                                /// Possible errors from this method are `Error::Deserialize`
+                                pub fn #fn_name(&self) -> ::error::Result<#variant> {
                                     ::properties::from_value(&self.#ident)
                                 }
 
-                                pub #set_fn_plural(&mut self, item: Vec<#variant>) -> ::error::Result<()> {
+                                /// Set a value in the given struct
+                                ///
+                                /// This method serializes the item to JSON, so be wary of using this a
+                                /// lot.
+                                ///
+                                /// Possible errors from this method are `Error::Serialize`
+                                pub fn #set_fn_name(&mut self, item: #variant) -> ::error::Result<()> {
                                     self.#ident = ::properties::to_value(item)?;
                                     Ok(())
+                                }
+                            };
+
+                            if is_functional {
+                                single
+                            } else {
+                                quote! {
+                                    #single
+
+                                    /// Retrieve many values from the given struct
+                                    ///
+                                    /// This method deserializes the item from JSON, so be wary of using
+                                    /// this a lot.
+                                    ///
+                                    /// Possible errors from this method are `Error::Deserialize`
+                                    pub fn #fn_plural(&self) -> ::error::Result<Vec<#variant>> {
+                                        ::properties::from_value(&self.#ident)
+                                    }
+
+                                    /// Set many values in the given struct
+                                    ///
+                                    /// This method serializes the item to JSON, so be wary of using this
+                                    /// a lot.
+                                    ///
+                                    /// Possible errors from this method are `Error::Serialize`
+                                    pub #set_fn_plural(&mut self, item: Vec<#variant>) -> ::error::Result<()> {
+                                        self.#ident = ::properties::to_value(item)?;
+                                        Ok(())
+                                    }
                                 }
                             }
                         }
                     } else if is_option {
-                        let single = quote! {
+                        let single_1 = quote! {
+                            /// Retrieve a value of type T from the given struct
+                            ///
+                            /// This method deserializes the item from JSON, so be wary of using
+                            /// this a lot.
+                            ///
+                            /// Possible errors from this method are `Error::NotFound` and
+                            /// `Error::Deserialize`
                             pub fn #fn_name<T: #variant>(&self) -> ::error::Result<T> {
                                 ::properties::from_item(&self.#ident)
                             }
+                        };
 
+                        let single_2 = quote! {
+                            /// Set a value of type T in the given struct
+                            ///
+                            /// This method serializes the item to JSON, so be wary of using this a
+                            /// lot.
+                            ///
+                            /// Possible errors from this method are `Error::Serialize`
                             pub fn #set_fn_name<T: #variant>(&mut self, item: T) -> ::error::Result<()> {
                                 self.#ident = ::properties::to_item(item)?;
                                 Ok(())
                             }
                         };
 
+                        let single = quote!{
+                            #single_1
+                            #single_2
+                        };
+
                         if is_functional {
                             single
                         } else {
-                            quote! {
-                                #single
-
+                            let plural_1 = quote! {
+                                /// Retrieve many values of type T from the given struct
+                                ///
+                                /// This method deserializes the item from JSON, so be wary of using
+                                /// this a lot.
+                                ///
+                                /// Possible errors from this method are `Error::NotFound` and
+                                /// `Error::Deserialize`
                                 pub fn #fn_plural<T: #variant>(&self) -> ::error::Result<Vec<T>> {
                                     ::properties::from_item(&self.#ident)
                                 }
+                            };
 
+                            let plural_2 = quote! {
+                                /// Set many values of type T in the given struct
+                                ///
+                                /// This method serializes the item to JSON, so be wary of using
+                                /// this a lot.
+                                ///
+                                /// Possible errors from this method are `Error::Serialize`
                                 pub fn #set_fn_plural<T: #variant>(&mut self, item: Vec<T>) -> ::error::Result<()> {
                                     self.#ident = ::properties::to_item(item)?;
                                     Ok(())
                                 }
+                            };
+
+                            quote! {
+                                #single
+                                #plural_1
+                                #plural_2
                             }
                         }
                     } else if is_vec {
-                        quote! {
+                        let single_1 = quote! {
+                            /// Retrieve many values of type T from the given struct
+                            ///
+                            /// This method deserializes the item from JSON, so be wary of using
+                            /// this a lot.
+                            ///
+                            /// Possible errors from this method are `Error::Deserialize`
                             pub fn #fn_name<T: #variant>(&self) -> ::error::Result<Vec<T>> {
                                 ::properties::from_vec(&self.#ident)
                             }
+                        };
 
+                        let single_2 = quote! {
+                            /// Set many values of type T in the given struct
+                            ///
+                            /// This method serializes the item to JSON, so be wary of using
+                            /// this a lot.
+                            ///
+                            /// Possible errors from this method are `Error::Serialize`
                             pub fn #set_fn_name<T: #variant>(&mut self, item: Vec<T>) -> ::error::Result<()> {
                                 self.#ident = ::properties::to_vec(item)?;
                                 Ok(())
                             }
+                        };
+
+                        quote! {
+                            #single_1
+                            #single_2
                         }
                     } else {
-                        let single = quote! {
+                        let single_1 = quote! {
+                            /// Retrieve a value of type T from the given struct
+                            ///
+                            /// This method deserializes the item from JSON, so be wary of using
+                            /// this a lot.
+                            ///
+                            /// Possible errors from this method are `Error::Deserialize`
                             pub fn #fn_name<T: #variant>(&self) -> ::error::Result<T> {
                                 ::properties::from_value(&self.#ident)
                             }
+                        };
 
+                        let single_2 = quote! {
+                            /// Set a value of type T in the given struct
+                            ///
+                            /// This method serializes the item to JSON, so be wary of using this a
+                            /// lot.
+                            ///
+                            /// Possible errors from this method are `Error::Serialize`
                             pub fn #set_fn_name<T: #variant>(&mut self, item: T) -> ::error::Result<()> {
                                 self.#ident = ::properties::to_value(item)?;
                                 Ok(())
                             }
                         };
 
+                        let single = quote! {
+                            #single_1
+                            #single_2
+                        };
+
                         if is_functional {
                             single
                         } else {
-                            quote! {
-                                #single
-
+                            let plural_1 = quote! {
+                                /// Retrieve many values of type T from the given struct
+                                ///
+                                /// This method deserializes the item from JSON, so be wary of using
+                                /// this a lot.
+                                ///
+                                /// Possible errors from this method are `Error::Deserialize`
                                 pub fn #fn_plural<T: #variant>(&self) -> ::error::Result<Vec<T>> {
                                     ::properties::from_value(&self.#ident)
                                 }
+                            };
 
+                            let plural_2 = quote! {
+                                /// Set many values of type T in the given struct
+                                ///
+                                /// This method serializes the item to JSON, so be wary of using this
+                                /// a lot.
+                                ///
+                                /// Possible errors from this method are `Error::Serialize`
                                 pub fn #set_fn_plural<T: #variant>(&mut self, item: Vec<T>) -> ::error::Result<()> {
                                     self.#ident = ::properties::to_value(item)?;
                                     Ok(())
                                 }
+                            };
+
+                            quote! {
+                                #single
+                                #plural_1
+                                #plural_2
                             }
                         }
                     }

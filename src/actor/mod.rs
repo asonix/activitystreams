@@ -17,7 +17,7 @@
  * along with ActivityStreams.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-use object::{Object, ObjectProperties};
+use object::{properties::ObjectProperties, Object};
 
 mod kind;
 pub use self::kind::*;
