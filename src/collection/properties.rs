@@ -22,7 +22,7 @@ use serde_json;
 use super::{Collection, CollectionPage};
 use link::Link;
 
-#[derive(Clone, Debug, Deserialize, Serialize, Properties)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize, Properties)]
 #[serde(rename_all = "camelCase")]
 pub struct CollectionProperties {
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -42,7 +42,7 @@ pub struct CollectionProperties {
     last: Option<serde_json::Value>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize, Properties)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize, Properties)]
 #[serde(rename_all = "camelCase")]
 pub struct CollectionPageProperties {
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -58,7 +58,7 @@ pub struct CollectionPageProperties {
     prev: Option<serde_json::Value>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize, Properties)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize, Properties)]
 #[serde(rename_all = "camelCase")]
 pub struct OrderedCollectionPageProperties {
     #[serde(skip_serializing_if = "Option::is_none")]

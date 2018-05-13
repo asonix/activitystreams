@@ -24,7 +24,7 @@ pub use self::kind::*;
 
 pub trait Actor: Object {}
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Appliation {
     #[serde(rename = "type")]
@@ -36,7 +36,7 @@ pub struct Appliation {
 
 impl Object for Appliation {}
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Group {
     #[serde(rename = "type")]
@@ -48,7 +48,7 @@ pub struct Group {
 
 impl Object for Group {}
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Organization {
     #[serde(rename = "type")]
@@ -60,7 +60,7 @@ pub struct Organization {
 
 impl Object for Organization {}
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Person {
     #[serde(rename = "type")]
@@ -72,7 +72,7 @@ pub struct Person {
 
 impl Object for Person {}
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Service {
     #[serde(rename = "type")]

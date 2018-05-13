@@ -24,7 +24,7 @@ use error::{Error, Result};
 use link::Link;
 use object::Object;
 
-#[derive(Clone, Debug, Serialize, Deserialize, Properties)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize, Properties)]
 #[serde(rename_all = "camelCase")]
 pub struct LinkProperties {
     #[serde(skip_serializing_if = "Option::is_none")]

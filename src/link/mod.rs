@@ -26,7 +26,7 @@ pub use self::properties::*;
 
 pub trait Link: DeserializeOwned + Serialize {}
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Mention {
     #[serde(rename = "type")]

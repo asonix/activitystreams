@@ -27,7 +27,7 @@ mod properties;
 pub use self::kind::*;
 pub use self::properties::*;
 
-#[derive(Clone, Debug, Deserialize, Serialize, Properties)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize, Properties)]
 #[serde(rename_all = "camelCase")]
 pub struct Collection {
     #[serde(rename = "type")]
@@ -42,7 +42,7 @@ pub struct Collection {
 
 impl Object for Collection {}
 
-#[derive(Clone, Debug, Deserialize, Serialize, Properties)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize, Properties)]
 #[serde(rename_all = "camelCase")]
 pub struct OrderedCollection {
     #[serde(rename = "type")]
@@ -57,7 +57,7 @@ pub struct OrderedCollection {
 
 impl Object for OrderedCollection {}
 
-#[derive(Clone, Debug, Deserialize, Serialize, Properties)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize, Properties)]
 #[serde(rename_all = "camelCase")]
 pub struct CollectionPage {
     #[serde(rename = "type")]
@@ -75,7 +75,7 @@ pub struct CollectionPage {
 
 impl Object for CollectionPage {}
 
-#[derive(Clone, Debug, Deserialize, Serialize, Properties)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize, Properties)]
 #[serde(rename_all = "camelCase")]
 pub struct OrderedCollectionPage {
     #[serde(rename = "type")]

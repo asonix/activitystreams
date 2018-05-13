@@ -24,7 +24,7 @@ use super::{kind::RejectType, properties::ActivityProperties, Activity};
 use link::Link;
 use object::{Object, ObjectProperties};
 
-#[derive(Clone, Debug, Deserialize, Serialize, Properties)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize, Properties)]
 #[serde(rename_all = "camelCase")]
 pub struct Reject {
     #[serde(rename = "type")]

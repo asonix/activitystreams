@@ -28,7 +28,7 @@ use object::{Image, Object};
 
 pub type UtcTime = DateTime<Utc>;
 
-#[derive(Clone, Debug, Serialize, Deserialize, Properties)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize, Properties)]
 #[serde(rename_all = "camelCase")]
 pub struct ObjectProperties {
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -148,7 +148,7 @@ impl ObjectProperties {
     }
 }
 
-#[derive(Clone, Debug, Serialize, Deserialize, Properties)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize, Properties)]
 #[serde(rename_all = "camelCase")]
 pub struct PlaceProperties {
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -172,7 +172,7 @@ pub struct PlaceProperties {
     radius: Option<serde_json::Value>,
 }
 
-#[derive(Clone, Debug, Serialize, Deserialize, Properties)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize, Properties)]
 #[serde(rename_all = "camelCase")]
 pub struct TombstoneProperties {
     #[serde(skip_serializing_if = "Option::is_none")]

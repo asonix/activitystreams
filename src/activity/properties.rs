@@ -22,7 +22,7 @@ use serde_json;
 use link::Link;
 use object::Object;
 
-#[derive(Clone, Debug, Deserialize, Serialize, Properties)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize, Properties)]
 #[serde(rename_all = "camelCase")]
 pub struct ActivityProperties {
     #[serde(skip_serializing_if = "Option::is_none")]

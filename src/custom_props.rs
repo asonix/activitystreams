@@ -24,7 +24,7 @@ use object::Object;
 #[serde(rename_all = "camelCase")]
 pub struct CustomLink<C, L> {
     #[serde(flatten)]
-    link: L,
+    pub link: L,
 
     #[serde(flatten)]
     pub custom_props: C,
@@ -40,7 +40,7 @@ impl<C, L: Link> CustomLink<C, L> {
 #[serde(rename_all = "camelCase")]
 pub struct CustomObject<C, O> {
     #[serde(flatten)]
-    object: O,
+    pub object: O,
 
     #[serde(flatten)]
     pub custom_props: C,

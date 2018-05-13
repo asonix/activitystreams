@@ -29,7 +29,7 @@ pub use self::properties::*;
 
 pub trait Object: DeserializeOwned + Serialize {}
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Article {
     #[serde(rename = "type")]
@@ -41,7 +41,7 @@ pub struct Article {
 
 impl Object for Article {}
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Audio {
     #[serde(rename = "type")]
@@ -53,7 +53,7 @@ pub struct Audio {
 
 impl Object for Audio {}
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Document {
     #[serde(rename = "type")]
@@ -65,7 +65,7 @@ pub struct Document {
 
 impl Object for Document {}
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Event {
     #[serde(rename = "type")]
@@ -77,7 +77,7 @@ pub struct Event {
 
 impl Object for Event {}
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Image {
     #[serde(rename = "type")]
@@ -89,7 +89,7 @@ pub struct Image {
 
 impl Object for Image {}
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Note {
     #[serde(rename = "type")]
@@ -101,7 +101,7 @@ pub struct Note {
 
 impl Object for Note {}
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Page {
     #[serde(rename = "type")]
@@ -113,7 +113,7 @@ pub struct Page {
 
 impl Object for Page {}
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Place {
     #[serde(rename = "type")]
@@ -128,7 +128,7 @@ pub struct Place {
 
 impl Object for Place {}
 
-#[derive(Clone, Debug, Serialize, Deserialize, Properties)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize, Properties)]
 #[serde(rename_all = "camelCase")]
 pub struct Profile {
     #[serde(rename = "type")]
@@ -143,7 +143,7 @@ pub struct Profile {
 
 impl Object for Profile {}
 
-#[derive(Clone, Debug, Serialize, Deserialize, Properties)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize, Properties)]
 #[serde(rename_all = "camelCase")]
 pub struct Relationship {
     #[serde(rename = "type")]
@@ -164,7 +164,7 @@ pub struct Relationship {
 
 impl Object for Relationship {}
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Tombstone {
     #[serde(rename = "type")]
@@ -179,7 +179,7 @@ pub struct Tombstone {
 
 impl Object for Tombstone {}
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Video {
     #[serde(rename = "type")]

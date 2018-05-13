@@ -24,7 +24,7 @@ use super::{kind::ArriveType, properties::ActivityProperties, Activity, Intransi
 use link::Link;
 use object::{Object, ObjectProperties};
 
-#[derive(Clone, Debug, Deserialize, Serialize, Properties)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize, Properties)]
 #[serde(rename_all = "camelCase")]
 pub struct Arrive {
     #[serde(rename = "type")]

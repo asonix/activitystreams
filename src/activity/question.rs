@@ -24,7 +24,7 @@ use super::{kind::QuestionType, properties::ActivityProperties, Activity, Intran
 use link::Link;
 use object::{Object, ObjectProperties};
 
-#[derive(Clone, Debug, Deserialize, Serialize, Properties)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize, Properties)]
 #[serde(rename_all = "camelCase")]
 pub struct Question {
     #[serde(rename = "type")]

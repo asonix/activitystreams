@@ -23,50 +23,50 @@ use serde::{
     de::{self, Deserialize, Deserializer, Visitor}, ser::{Serialize, Serializer},
 };
 
-#[derive(Clone, Debug, UnitString)]
+#[derive(Clone, Debug, Default, UnitString)]
 #[activitystreams(Article)]
 pub struct ArticleType;
 
-#[derive(Clone, Debug, UnitString)]
+#[derive(Clone, Debug, Default, UnitString)]
 #[activitystreams(Audio)]
 pub struct AudioType;
 
-#[derive(Clone, Debug, UnitString)]
+#[derive(Clone, Debug, Default, UnitString)]
 #[activitystreams(Document)]
 pub struct DocumentType;
 
-#[derive(Clone, Debug, UnitString)]
+#[derive(Clone, Debug, Default, UnitString)]
 #[activitystreams(Event)]
 pub struct EventType;
 
-#[derive(Clone, Debug, UnitString)]
+#[derive(Clone, Debug, Default, UnitString)]
 #[activitystreams(Image)]
 pub struct ImageType;
 
-#[derive(Clone, Debug, UnitString)]
+#[derive(Clone, Debug, Default, UnitString)]
 #[activitystreams(Note)]
 pub struct NoteType;
 
-#[derive(Clone, Debug, UnitString)]
+#[derive(Clone, Debug, Default, UnitString)]
 #[activitystreams(Page)]
 pub struct PageType;
 
-#[derive(Clone, Debug, UnitString)]
+#[derive(Clone, Debug, Default, UnitString)]
 #[activitystreams(Place)]
 pub struct PlaceType;
 
-#[derive(Clone, Debug, UnitString)]
+#[derive(Clone, Debug, Default, UnitString)]
 #[activitystreams(Profile)]
 pub struct ProfileType;
 
-#[derive(Clone, Debug, UnitString)]
+#[derive(Clone, Debug, Default, UnitString)]
 #[activitystreams(Relationship)]
 pub struct RelationshipType;
 
-#[derive(Clone, Debug, UnitString)]
+#[derive(Clone, Debug, Default, UnitString)]
 #[activitystreams(Tombstone)]
 pub struct TombstoneType;
 
-#[derive(Clone, Debug, UnitString)]
+#[derive(Clone, Debug, Default, UnitString)]
 #[activitystreams(Video)]
 pub struct VideoType;
