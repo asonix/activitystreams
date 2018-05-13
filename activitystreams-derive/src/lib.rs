@@ -157,7 +157,7 @@ pub fn properties_derive(input: TokenStream) -> TokenStream {
         _ => panic!("Can only derive for named fields"),
     };
 
-    let getters = fields
+    let impls = fields
         .named
         .iter()
         .filter_map(|field| {
@@ -220,80 +220,88 @@ pub fn properties_derive(input: TokenStream) -> TokenStream {
                     let fn_plural = Ident::from(format!("{}_{}_vec", ident, lower_variant));
                     let variant = Ident::from(variant);
 
-                    if is_concrete && is_option && is_functional {
-                        quote! {
-                            pub fn #fn_name(&self) -> Result<#variant> {
-                                self.get_item(|t| &t.#ident)
+                    if is_concrete && is_option {
+                        let single = quote! {
+                            pub fn #fn_name(&self) -> ::error::Result<#variant> {
+                                ::properties::get_item(&self.#ident)
                             }
-                        }
-                    } else if is_concrete && is_option {
-                        quote! {
-                            pub fn #fn_name(&self) -> Result<#variant> {
-                                self.get_item(|t| &t.#ident)
-                            }
+                        };
 
-                            pub fn #fn_plural(&self) -> Result<Vec<#variant>> {
-                                self.get_item(|t| &t.#ident)
+                        if is_functional {
+                            single
+                        } else {
+                            quote! {
+                                #single
+
+                                pub fn #fn_plural(&self) -> ::error::Result<Vec<#variant>> {
+                                    ::properties::get_item(&self.#ident)
+                                }
                             }
                         }
                     } else if is_concrete && is_vec {
                         quote! {
-                            pub fn #fn_name(&self) -> Result<Vec<#variant>> {
-                                self.get_vec(|t| &t.#ident)
-                            }
-                        }
-                    } else if is_concrete && is_functional {
-                        quote! {
-                            pub fn #fn_name(&self) -> Result<#variant> {
-                                self.get_value(|t| &t.#ident)
+                            pub fn #fn_name(&self) -> ::error::Result<Vec<#variant>> {
+                                ::properties::get_vec(&self.#ident)
                             }
                         }
                     } else if is_concrete {
-                        quote! {
-                            pub fn #fn_name(&self) -> Result<#variant> {
-                                self.get_value(|t| &t.#ident)
+                        let single = quote! {
+                            pub fn #fn_name(&self) -> ::error::Result<#variant> {
+                                ::properties::get_value(&self.#ident)
                             }
+                        };
 
-                            pub fn #fn_plural(&self) -> Result<Vec<#variant>> {
-                                self.get_value(|t| &t.#ident)
-                            }
-                        }
-                    } else if is_option && is_functional {
-                        quote! {
-                            pub fn #fn_name<T: #variant>(&self) -> Result<T> {
-                                self.get_item(|t| &t.#ident)
+                        if is_functional {
+                            single
+                        } else {
+                            quote! {
+                                #single
+
+                                pub fn #fn_plural(&self) -> ::error::Result<Vec<#variant>> {
+                                    ::properties::get_value(&self.#ident)
+                                }
                             }
                         }
                     } else if is_option {
-                        quote! {
-                            pub fn #fn_name<T: #variant>(&self) -> Result<T> {
-                                self.get_item(|t| &t.#ident)
+                        let single = quote! {
+                            pub fn #fn_name<T: #variant>(&self) -> ::error::Result<T> {
+                                ::properties::get_item(&self.#ident)
                             }
+                        };
 
-                            pub fn #fn_plural<T: #variant>(&self) -> Result<Vec<T>> {
-                                self.get_item(|t| &t.#ident)
+                        if is_functional {
+                            single
+                        } else {
+                            quote! {
+                                #single
+
+                                pub fn #fn_plural<T: #variant>(&self) -> ::error::Result<Vec<T>> {
+                                    ::properties::get_item(&self.#ident)
+                                }
                             }
                         }
                     } else if is_vec {
                         quote! {
-                            pub fn #fn_name<T: #variant>(&self) -> Result<Vec<T>> {
-                                self.get_vec(|t| &t.#ident)
-                            }
-                        }
-                    } else if is_functional {
-                        quote! {
-                            pub fn #fn_name<T: #variant>(&self) -> Result<T> {
-                                self.get_value(|t| &t.#ident)
+                            pub fn #fn_name<T: #variant>(&self) -> ::error::Result<Vec<T>> {
+                                ::properties::get_vec(&self.#ident)
                             }
                         }
                     } else {
-                        quote! {
-                            pub fn #fn_name<T: #variant>(&self) -> Result<T> {
-                                self.get_value(|t| &t.#ident)
+                        let single = quote! {
+                            pub fn #fn_name<T: #variant>(&self) -> ::error::Result<T> {
+                                ::properties::get_value(&self.#ident)
                             }
+                        };
 
-                            pub fn #fn_plural<T: #variant>(&self) -> Result<Vec<T>> {
-                                self.get_value(|t| &t.#ident)
+                        if is_functional {
+                            single
+                        } else {
+                            quote! {
+                                #single
+
+                                pub fn #fn_plural<T: #variant>(&self) -> ::error::Result<Vec<T>> {
+                                    ::properties::get_value(&self.#ident)
+                                }
                             }
                         }
                     }
@@ -301,11 +309,9 @@ pub fn properties_derive(input: TokenStream) -> TokenStream {
         });
 
     let mut tokens = Tokens::new();
-    tokens.append_all(getters);
+    tokens.append_all(impls);
 
     let full = quote!{
-        impl Properties for #name {}
-
         impl #name {
             #tokens
         }

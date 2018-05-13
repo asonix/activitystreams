@@ -23,7 +23,6 @@ use serde_json;
 use error::{Error, Result};
 use link::Link;
 use object::Object;
-use Properties;
 
 #[derive(Clone, Debug, Serialize, Deserialize, Properties)]
 #[serde(rename_all = "camelCase")]

@@ -20,9 +20,7 @@
 use serde::{de::DeserializeOwned, ser::Serialize};
 use serde_json;
 
-use error::Result;
 use link::Link;
-use Properties;
 
 mod kind;
 mod properties;

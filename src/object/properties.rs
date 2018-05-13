@@ -25,7 +25,8 @@ use collection::Collection;
 use error::{Error, Result};
 use link::Link;
 use object::{Image, Object};
-use Properties;
+
+pub type UtcTime = DateTime<Utc>;
 
 #[derive(Clone, Debug, Serialize, Deserialize, Properties)]
 #[serde(rename_all = "camelCase")]
@@ -59,7 +60,7 @@ pub struct ObjectProperties {
     name: Option<serde_json::Value>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
-    #[activitystreams(concrete(String), functional)]
+    #[activitystreams(concrete(String, UtcTime), functional)]
     end_time: Option<serde_json::Value>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -87,7 +88,7 @@ pub struct ObjectProperties {
     preview: Option<serde_json::Value>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
-    #[activitystreams(concrete(String), functional)]
+    #[activitystreams(concrete(String, UtcTime), functional)]
     published: Option<serde_json::Value>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -95,7 +96,7 @@ pub struct ObjectProperties {
     replies: Option<serde_json::Value>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
-    #[activitystreams(concrete(String), functional)]
+    #[activitystreams(concrete(String, UtcTime), functional)]
     start_time: Option<serde_json::Value>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -107,7 +108,7 @@ pub struct ObjectProperties {
     tag: Option<serde_json::Value>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
-    #[activitystreams(concrete(String), functional)]
+    #[activitystreams(concrete(String, UtcTime), functional)]
     updated: Option<serde_json::Value>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -145,26 +146,6 @@ impl ObjectProperties {
         self.media_type_string()
             .and_then(|s| s.parse().map_err(|_| Error::Deserialize))
     }
-
-    pub fn end_time(&self) -> Result<DateTime<Utc>> {
-        self.end_time_string()
-            .and_then(|s| s.parse().map_err(|_| Error::Deserialize))
-    }
-
-    pub fn published(&self) -> Result<DateTime<Utc>> {
-        self.published_string()
-            .and_then(|s| s.parse().map_err(|_| Error::Deserialize))
-    }
-
-    pub fn start_time(&self) -> Result<DateTime<Utc>> {
-        self.start_time_string()
-            .and_then(|s| s.parse().map_err(|_| Error::Deserialize))
-    }
-
-    pub fn updated(&self) -> Result<DateTime<Utc>> {
-        self.updated_string()
-            .and_then(|s| s.parse().map_err(|_| Error::Deserialize))
-    }
 }
 
 #[derive(Clone, Debug, Serialize, Deserialize, Properties)]
@@ -199,13 +180,6 @@ pub struct TombstoneProperties {
     former_type: Option<serde_json::Value>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
-    #[activitystreams(concrete(String), functional)]
+    #[activitystreams(concrete(String, UtcTime), functional)]
     deleted: Option<serde_json::Value>,
-}
-
-impl TombstoneProperties {
-    pub fn deleted(&self) -> Result<DateTime<Utc>> {
-        self.deleted_string()
-            .and_then(|s| s.parse().map_err(|_| Error::Deserialize))
-    }
 }

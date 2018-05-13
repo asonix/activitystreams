@@ -19,10 +19,8 @@
 
 use serde_json;
 
-use error::Result;
 use link::Link;
 use object::Object;
-use Properties;
 
 #[derive(Clone, Debug, Deserialize, Serialize, Properties)]
 #[serde(rename_all = "camelCase")]

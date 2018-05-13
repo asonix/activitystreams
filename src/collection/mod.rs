@@ -19,7 +19,6 @@
 
 use serde_json;
 
-use error::Result;
 use link::Link;
 use object::Object;
 
@@ -27,7 +26,6 @@ mod kind;
 mod properties;
 pub use self::kind::*;
 pub use self::properties::*;
-use Properties;
 
 #[derive(Clone, Debug, Deserialize, Serialize, Properties)]
 #[serde(rename_all = "camelCase")]

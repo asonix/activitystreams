@@ -21,10 +21,8 @@ use serde_json;
 
 use super::{kind::QuestionType, properties::ActivityProperties, Activity, IntransitiveActivity};
 
-use error::Result;
 use link::Link;
 use object::{Object, ObjectProperties};
-use Properties;
 
 #[derive(Clone, Debug, Deserialize, Serialize, Properties)]
 #[serde(rename_all = "camelCase")]
