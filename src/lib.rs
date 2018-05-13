@@ -43,3 +43,10 @@ pub mod error;
 pub mod link;
 pub mod object;
 pub mod properties;
+
+pub use self::activity::{Activity, IntransitiveActivity};
+pub use self::actor::Actor;
+pub use self::custom_props::{CustomLink, CustomObject};
+pub use self::error::Error;
+pub use self::link::Link;
+pub use self::object::Object;
