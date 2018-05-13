@@ -38,6 +38,7 @@ pub fn context() -> serde_json::Value {
 pub mod activity;
 pub mod actor;
 pub mod collection;
+pub mod custom_props;
 pub mod error;
 pub mod link;
 pub mod object;

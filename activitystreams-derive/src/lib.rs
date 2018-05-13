@@ -52,7 +52,7 @@ pub fn unit_string(input: TokenStream) -> TokenStream {
         .unwrap()
         .clone();
 
-    let value = get_value(attr);
+    let value = from_value(attr);
 
     let visitor_name = Ident::from(format!("{}Visitor", value));
 
@@ -118,7 +118,7 @@ pub fn unit_string(input: TokenStream) -> TokenStream {
     c.into()
 }
 
-fn get_value(attr: Attribute) -> String {
+fn from_value(attr: Attribute) -> String {
     let group = attr.tts
         .clone()
         .into_iter()
@@ -218,12 +218,19 @@ pub fn properties_derive(input: TokenStream) -> TokenStream {
                     let lower_variant = variant.to_lowercase();
                     let fn_name = Ident::from(format!("{}_{}", ident, lower_variant));
                     let fn_plural = Ident::from(format!("{}_{}_vec", ident, lower_variant));
+                    let set_fn_name = Ident::from(format!("set_{}_{}", ident, lower_variant));
+                    let set_fn_plural = Ident::from(format!("set_{}_{}_vec", ident, lower_variant));
                     let variant = Ident::from(variant);
 
                     if is_concrete && is_option {
                         let single = quote! {
                             pub fn #fn_name(&self) -> ::error::Result<#variant> {
-                                ::properties::get_item(&self.#ident)
+                                ::properties::from_item(&self.#ident)
+                            }
+
+                            pub fn #set_fn_name(&mut self, item: #variant) -> ::error::Result<()> {
+                                self.#ident = ::properties::to_item(item)?;
+                                Ok(())
                             }
                         };
 
@@ -234,20 +241,35 @@ pub fn properties_derive(input: TokenStream) -> TokenStream {
                                 #single
 
                                 pub fn #fn_plural(&self) -> ::error::Result<Vec<#variant>> {
-                                    ::properties::get_item(&self.#ident)
+                                    ::properties::from_item(&self.#ident)
+                                }
+
+                                pub fn #set_fn_plural(&mut self, item: Vec<#variant>) -> ::error::Result<()> {
+                                    self.#ident = ::properties::to_item(item)?;
+                                    Ok(())
                                 }
                             }
                         }
                     } else if is_concrete && is_vec {
                         quote! {
                             pub fn #fn_name(&self) -> ::error::Result<Vec<#variant>> {
-                                ::properties::get_vec(&self.#ident)
+                                ::properties::from_vec(&self.#ident)
+                            }
+
+                            pub fn #set_fn_name(&mut self, item: Vec<#variant>>) -> ::error::Result<()> {
+                                self.#ident = ::properties::to_vec(item)?;
+                                Ok(())
                             }
                         }
                     } else if is_concrete {
                         let single = quote! {
                             pub fn #fn_name(&self) -> ::error::Result<#variant> {
-                                ::properties::get_value(&self.#ident)
+                                ::properties::from_value(&self.#ident)
+                            }
+
+                            pub fn #set_fn_name(&mut self, item: #variant) -> ::error::Result<()> {
+                                self.#ident = ::properties::to_value(item)?;
+                                Ok(())
                             }
                         };
 
@@ -258,14 +280,24 @@ pub fn properties_derive(input: TokenStream) -> TokenStream {
                                 #single
 
                                 pub fn #fn_plural(&self) -> ::error::Result<Vec<#variant>> {
-                                    ::properties::get_value(&self.#ident)
+                                    ::properties::from_value(&self.#ident)
+                                }
+
+                                pub #set_fn_plural(&mut self, item: Vec<#variant>) -> ::error::Result<()> {
+                                    self.#ident = ::properties::to_value(item)?;
+                                    Ok(())
                                 }
                             }
                         }
                     } else if is_option {
                         let single = quote! {
                             pub fn #fn_name<T: #variant>(&self) -> ::error::Result<T> {
-                                ::properties::get_item(&self.#ident)
+                                ::properties::from_item(&self.#ident)
+                            }
+
+                            pub fn #set_fn_name<T: #variant>(&mut self, item: T) -> ::error::Result<()> {
+                                self.#ident = ::properties::to_item(item)?;
+                                Ok(())
                             }
                         };
 
@@ -276,20 +308,35 @@ pub fn properties_derive(input: TokenStream) -> TokenStream {
                                 #single
 
                                 pub fn #fn_plural<T: #variant>(&self) -> ::error::Result<Vec<T>> {
-                                    ::properties::get_item(&self.#ident)
+                                    ::properties::from_item(&self.#ident)
+                                }
+
+                                pub fn #set_fn_plural<T: #variant>(&mut self, item: Vec<T>) -> ::error::Result<()> {
+                                    self.#ident = ::properties::to_item(item)?;
+                                    Ok(())
                                 }
                             }
                         }
                     } else if is_vec {
                         quote! {
                             pub fn #fn_name<T: #variant>(&self) -> ::error::Result<Vec<T>> {
-                                ::properties::get_vec(&self.#ident)
+                                ::properties::from_vec(&self.#ident)
+                            }
+
+                            pub fn #set_fn_name<T: #variant>(&mut self, item: Vec<T>) -> ::error::Result<()> {
+                                self.#ident = ::properties::to_vec(item)?;
+                                Ok(())
                             }
                         }
                     } else {
                         let single = quote! {
                             pub fn #fn_name<T: #variant>(&self) -> ::error::Result<T> {
-                                ::properties::get_value(&self.#ident)
+                                ::properties::from_value(&self.#ident)
+                            }
+
+                            pub fn #set_fn_name<T: #variant>(&mut self, item: T) -> ::error::Result<()> {
+                                self.#ident = ::properties::to_value(item)?;
+                                Ok(())
                             }
                         };
 
@@ -300,7 +347,12 @@ pub fn properties_derive(input: TokenStream) -> TokenStream {
                                 #single
 
                                 pub fn #fn_plural<T: #variant>(&self) -> ::error::Result<Vec<T>> {
-                                    ::properties::get_value(&self.#ident)
+                                    ::properties::from_value(&self.#ident)
+                                }
+
+                                pub fn #set_fn_plural<T: #variant>(&mut self, item: Vec<T>) -> ::error::Result<()> {
+                                    self.#ident = ::properties::to_value(item)?;
+                                    Ok(())
                                 }
                             }
                         }

@@ -17,18 +17,40 @@
  * along with ActivityStreams.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-use std::result;
+use link::Link;
+use object::Object;
 
-#[derive(Copy, Clone, Debug, Fail)]
-pub enum Error {
-    #[fail(display = "Key not present")]
-    NotFound,
+#[derive(Clone, Debug, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct CustomLink<C, L> {
+    #[serde(flatten)]
+    link: L,
 
-    #[fail(display = "Failed to deserialize data as requested type")]
-    Deserialize,
-
-    #[fail(display = "Failed to serialize data")]
-    Serialize,
+    #[serde(flatten)]
+    pub custom_props: C,
 }
 
-pub type Result<T> = result::Result<T, Error>;
+impl<C, L: Link> CustomLink<C, L> {
+    pub fn new(link: L, custom_props: C) -> Self {
+        CustomLink { link, custom_props }
+    }
+}
+
+#[derive(Clone, Debug, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct CustomObject<C, O> {
+    #[serde(flatten)]
+    object: O,
+
+    #[serde(flatten)]
+    pub custom_props: C,
+}
+
+impl<C, O: Object> CustomObject<C, O> {
+    pub fn new(object: O, custom_props: C) -> Self {
+        CustomObject {
+            object,
+            custom_props,
+        }
+    }
+}
