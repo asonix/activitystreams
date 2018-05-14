@@ -23,13 +23,13 @@ use activitystreams_traits::{Actor, Object};
 
 use object::properties::ObjectProperties;
 
-mod kind;
-pub use self::kind::*;
+pub mod kind;
+use self::kind::*;
 
 /// Describes a software application.
 #[derive(Clone, Debug, Default, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-pub struct Appliation {
+pub struct Application {
     #[serde(rename = "type")]
     kind: ApplicationType,
 
@@ -38,8 +38,8 @@ pub struct Appliation {
     pub object_props: ObjectProperties,
 }
 
-impl Object for Appliation {}
-impl Actor for Appliation {}
+impl Object for Application {}
+impl Actor for Application {}
 
 /// Represents a formal or informal collective of Actors.
 #[derive(Clone, Debug, Default, Deserialize, Serialize)]

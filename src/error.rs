@@ -19,8 +19,4 @@
 
 //! Error traits and types
 
-/// The Error type
-pub use activitystreams_traits::Error;
-
-/// An alias for Result<T, Error>
-pub use activitystreams_traits::Result;
+pub use activitystreams_traits::{Error, Result};

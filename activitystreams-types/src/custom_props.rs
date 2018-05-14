@@ -21,9 +21,8 @@
 
 use serde::{de::DeserializeOwned, ser::Serialize};
 
-use activitystreams_traits::{
-    Activity, Actor, Collection, CollectionPage, IntransitiveActivity, Link, Object,
-};
+use activitystreams_traits::{Activity, Actor, Collection, CollectionPage, IntransitiveActivity,
+                             Link, Object};
 
 /// A custom type extending Link
 ///

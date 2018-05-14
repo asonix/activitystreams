@@ -28,6 +28,7 @@ pub mod properties;
 use self::kind::*;
 use self::properties::*;
 
+/// The default `Collection` type.
 #[derive(Clone, Debug, Default, Deserialize, Serialize, Properties)]
 #[serde(rename_all = "camelCase")]
 pub struct UnorderedCollection {

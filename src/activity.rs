@@ -19,18 +19,9 @@
 
 //! Activity traits and types
 
-/// An Activity is a subtype of `Object` that describes some form of action that may happen, is
-/// currently happening, or has already happened.
-///
-/// The `Activity` type itself serves as an abstract base type for all types of activities. It is
-/// important to note that the `Activity` type itself does not carry any specific semantics about
-/// the kind of action being taken.
-pub use activitystreams_traits::Activity;
-
-/// Instances of `IntransitiveActivity` are a subtype of `Activity` representing intransitive
-/// actions.
-///
-/// The `object` property is therefore inappropriate for these activities.
-pub use activitystreams_traits::IntransitiveActivity;
-
-pub use activitystreams_types::activity::*;
+pub use activitystreams_traits::{Activity, IntransitiveActivity};
+pub use activitystreams_types::activity::{kind, properties, AMove, Accept, Add, Announce, Arrive,
+                                          Block, Create, Delete, Dislike, Flag, Follow, Ignore,
+                                          Invite, Join, Leave, Like, Listen, Offer, Question,
+                                          Read, Reject, Remove, TentativeAccept, TentativeReject,
+                                          Travel, Undo, Update, View};

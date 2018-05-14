@@ -19,25 +19,5 @@
 
 //! Actor traits and types
 
-/// `Actor` types are `Object` types that are capable of performing activities.
-///
-/// This specification intentionally defines `Actors` in only the most generalized way, stopping
-/// short of defining semantically specific properties for each. All Actor objects are
-/// specializations of `Object` and inherit all of the core properties common to all Objects.
-/// External vocabularies can be used to express additional detail not covered by the Activity
-/// Vocabulary. VCard [[vcard-rdf](https://www.w3.org/TR/vcard-rdf/) SHOULD be used to provide
-/// additional metadata for `Person`, `Group`, and `Organization` instances.
-///
-/// While implementations are free to introduce new types of Actors beyond those defined by the
-/// Activity Vocabulary, interoperability issues can arise when applications rely too much on
-/// extension types that are not recognized by other implementations. Care should be taken to not
-/// unduly overlap with or duplicate the existing `Actor` types.
-///
-/// When an implementation uses an extension type that overlaps with a core vocabulary type, the
-/// implementation MUST also specify the core vocabulary type. For instance, some vocabularies
-/// (e.g. VCard) define their own types for describing people. An implementation that wishes, for
-/// example, to use a `vcard:Individual` as an `Actor` MUST also identify that `Actor` as a
-/// `Person`.
 pub use activitystreams_traits::Actor;
-
-pub use activitystreams_types::actor::*;
+pub use activitystreams_types::actor::{kind, Application, Group, Organization, Person, Service};
