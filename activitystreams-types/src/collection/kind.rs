@@ -19,12 +19,6 @@
 
 //! Namespace for Unit Structs that serialize to strings
 
-use std::fmt;
-
-use serde::{
-    de::{self, Deserialize, Deserializer, Visitor}, ser::{Serialize, Serializer},
-};
-
 #[derive(Clone, Debug, Default, UnitString)]
 #[activitystreams(Collection)]
 pub struct CollectionType;

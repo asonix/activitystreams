@@ -17,12 +17,6 @@
  * along with ActivityStreams Types.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-use std::fmt;
-
-use serde::{
-    de::{self, Deserialize, Deserializer, Visitor}, ser::{Serialize, Serializer},
-};
-
 #[derive(Clone, Debug, Default, UnitString)]
 #[activitystreams(Accept)]
 pub struct AcceptType;

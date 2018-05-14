@@ -19,12 +19,6 @@
 
 //! Namespace for Unit Structs that serialize to strings
 
-use std::fmt;
-
-use serde::{
-    de::{self, Deserialize, Deserializer, Visitor}, ser::{Serialize, Serializer},
-};
-
 /// A Unit Struct that represents the string "Article"
 #[derive(Clone, Debug, Default, UnitString)]
 #[activitystreams(Article)]

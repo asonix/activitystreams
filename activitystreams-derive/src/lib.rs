@@ -17,6 +17,55 @@
  * along with ActivityStreams Derive.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+//! Derive macros for Activity Streams
+//!
+//! ## Examples
+//!
+//! ```rust
+//! #[macro_use]
+//! extern crate activitystreams_derive;
+//! extern crate activitystreams_traits;
+//! extern crate serde;
+//! #[macro_use]
+//! extern crate serde_derive;
+//! extern crate serde_json;
+//!
+//! use activitystreams_traits::{Link, Object};
+//!
+//! /// Using the UnitString derive macro
+//! ///
+//! /// This macro implements Serialize and Deserialize for the given type, making this type
+//! /// represent the string "SomeKind" in JSON.
+//! #[derive(Clone, Debug, Default, UnitString)]
+//! #[activitystreams(SomeKind)]
+//! pub struct MyKind;
+//!
+//! /// Using the Properties derive macro
+//! ///
+//! /// This macro generates getters and setters for the associated fields.
+//! #[derive(Clone, Debug, Default, Deserialize, Serialize, Properties)]
+//! #[serde(rename_all = "camelCase")]
+//! pub struct MyProperties {
+//!     /// Derive getters and setters for @context with Link and Object traits.
+//!     #[serde(rename = "@context")]
+//!     #[activitystreams(ab(Object, Link))]
+//!     pub context: Option<serde_json::Value>,
+//!
+//!     /// Derive getters and setters for context with Link and Object traits.
+//!     pub kind: MyKind,
+//!
+//!     /// Derive getters and setters for required_key with String type.
+//!     ///
+//!     /// In the Activity Streams spec, 'functional' means there can only be one item for this
+//!     /// key. This means all fields not labeled 'functional' can also be serialized/deserialized
+//!     /// as Vec<T>.
+//!     #[activitystreams(concrete(String), functional)]
+//!     pub required_key: serde_json::Value,
+//! }
+//! #
+//! # fn main () {}
+//! ```
+
 extern crate proc_macro;
 extern crate proc_macro2;
 extern crate syn;
@@ -57,10 +106,10 @@ pub fn unit_string(input: TokenStream) -> TokenStream {
     let visitor_name = Ident::from(format!("{}Visitor", value));
 
     let serialize = quote! {
-        impl Serialize for #name {
+        impl ::serde::ser::Serialize for #name {
             fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
             where
-                S: Serializer,
+                S: ::serde::ser::Serializer,
             {
                 serializer.serialize_str(#value)
             }
@@ -68,7 +117,7 @@ pub fn unit_string(input: TokenStream) -> TokenStream {
     };
 
     let expecting = quote! {
-        fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
+        fn expecting(&self, formatter: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
             write!(formatter, "The string '{}'", #value)
         }
     };
@@ -76,12 +125,12 @@ pub fn unit_string(input: TokenStream) -> TokenStream {
     let visit = quote! {
         fn visit_str<E>(self, v: &str) -> Result<Self::Value, E>
         where
-            E: de::Error,
+            E: ::serde::de::Error,
         {
             if v == #value {
                 Ok(#name)
             } else {
-                Err(de::Error::custom("Invalid type"))
+                Err(::serde::de::Error::custom("Invalid type"))
             }
         }
     };
@@ -89,7 +138,7 @@ pub fn unit_string(input: TokenStream) -> TokenStream {
     let visitor = quote! {
         struct #visitor_name;
 
-        impl<'de> Visitor<'de> for #visitor_name {
+        impl<'de> ::serde::de::Visitor<'de> for #visitor_name {
             type Value = #name;
 
             #expecting
@@ -99,10 +148,10 @@ pub fn unit_string(input: TokenStream) -> TokenStream {
     };
 
     let deserialize = quote! {
-        impl<'de> Deserialize<'de> for #name {
+        impl<'de> ::serde::de::Deserialize<'de> for #name {
             fn deserialize<D>(deserializer: D) -> Result<#name, D::Error>
             where
-                D: Deserializer<'de>,
+                D: ::serde::de::Deserializer<'de>,
             {
                 deserializer.deserialize_str(#visitor_name)
             }
