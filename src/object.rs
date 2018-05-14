@@ -17,4 +17,5 @@
  * along with ActivityStreams.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-pub use activitystreams_traits::{Error, Result};
+pub use activitystreams_traits::Object;
+pub use activitystreams_types::object::*;

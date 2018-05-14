@@ -17,28 +17,12 @@
  * along with ActivityStreams.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#[macro_use]
-extern crate activitystreams_derive;
-extern crate chrono;
-#[macro_use]
-extern crate failure;
-extern crate mime;
-extern crate serde;
-#[macro_use]
-extern crate serde_derive;
-#[macro_use]
-extern crate serde_json;
-
-pub fn context() -> serde_json::Value {
-    json!({
-        "one": "two",
-    })
-}
+extern crate activitystreams_traits;
+extern crate activitystreams_types;
 
 pub mod activity;
 pub mod actor;
 pub mod collection;
-pub mod custom_props;
 pub mod error;
 pub mod link;
 pub mod object;
@@ -47,7 +31,6 @@ pub mod properties;
 pub use self::activity::{Activity, IntransitiveActivity};
 pub use self::actor::Actor;
 pub use self::collection::{Collection, CollectionPage};
-pub use self::custom_props::{CustomLink, CustomObject};
 pub use self::error::Error;
 pub use self::link::Link;
 pub use self::object::Object;

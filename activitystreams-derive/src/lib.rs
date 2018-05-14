@@ -224,7 +224,7 @@ pub fn properties_derive(input: TokenStream) -> TokenStream {
 
                     if is_concrete {
                         if is_option {
-                            let single = quote! {
+                            let single_1 = quote! {
                                 /// Retrieve a value from the given struct
                                 ///
                                 /// This method deserializes the item from JSON, so be wary of using
@@ -232,28 +232,33 @@ pub fn properties_derive(input: TokenStream) -> TokenStream {
                                 ///
                                 /// Possible errors from this method are `Error::NotFound` and
                                 /// `Error::Deserialize`
-                                pub fn #fn_name(&self) -> ::error::Result<#variant> {
-                                    ::properties::from_item(&self.#ident)
+                                pub fn #fn_name(&self) -> ::activitystreams_traits::Result<#variant> {
+                                    ::activitystreams_traits::properties::from_item(&self.#ident)
                                 }
+                            };
 
+                            let single_2 = quote! {
                                 /// Set a value in the given struct
                                 ///
                                 /// This method serializes the item to JSON, so be wary of using this a
                                 /// lot.
                                 ///
                                 /// Possible errors from this method are `Error::Serialize`
-                                pub fn #set_fn_name(&mut self, item: #variant) -> ::error::Result<()> {
-                                    self.#ident = ::properties::to_item(item)?;
+                                pub fn #set_fn_name(&mut self, item: #variant) -> ::activitystreams_traits::Result<()> {
+                                    self.#ident = ::activitystreams_traits::properties::to_item(item)?;
                                     Ok(())
                                 }
+                            };
+
+                            let single = quote! {
+                                #single_1
+                                #single_2
                             };
 
                             if is_functional {
                                 single
                             } else {
-                                quote! {
-                                    #single
-
+                                let plural_1 = quote! {
                                     /// Retrieve many values from the given struct
                                     ///
                                     /// This method deserializes the item from JSON, so be wary of using
@@ -261,44 +266,59 @@ pub fn properties_derive(input: TokenStream) -> TokenStream {
                                     ///
                                     /// Possible errors from this method are `Error::NotFound` and
                                     /// `Error::Deserialize`
-                                    pub fn #fn_plural(&self) -> ::error::Result<Vec<#variant>> {
-                                        ::properties::from_item(&self.#ident)
+                                    pub fn #fn_plural(&self) -> ::activitystreams_traits::Result<Vec<#variant>> {
+                                        ::activitystreams_traits::properties::from_item(&self.#ident)
                                     }
+                                };
 
+                                let plural_2 = quote! {
                                     /// Set many values in the given struct
                                     ///
                                     /// This method serializes the item to JSON, so be wary of using
                                     /// this a lot.
                                     ///
                                     /// Possible errors from this method are `Error::Serialize`
-                                    pub fn #set_fn_plural(&mut self, item: Vec<#variant>) -> ::error::Result<()> {
-                                        self.#ident = ::properties::to_item(item)?;
+                                    pub fn #set_fn_plural(&mut self, item: Vec<#variant>) -> ::activitystreams_traits::Result<()> {
+                                        self.#ident = ::activitystreams_traits::properties::to_item(item)?;
                                         Ok(())
                                     }
+                                };
+
+                                quote! {
+                                    #single
+                                    #plural_1
+                                    #plural_2
                                 }
                             }
                         } else if is_vec {
-                            quote! {
+                            let single_1 = quote! {
                                 /// Retrieve many values from the given struct
                                 ///
                                 /// This method deserializes the item from JSON, so be wary of using
                                 /// this a lot.
                                 ///
                                 /// Possible errors from this method are `Error::Deserialize`
-                                pub fn #fn_name(&self) -> ::error::Result<Vec<#variant>> {
-                                    ::properties::from_vec(&self.#ident)
+                                pub fn #fn_name(&self) -> ::activitystreams_traits::Result<Vec<#variant>> {
+                                    ::activitystreams_traits::properties::from_vec(&self.#ident)
                                 }
+                            };
 
+                            let single_2 = quote! {
                                 /// Set many values in the given struct
                                 ///
                                 /// This method serializes the item to JSON, so be wary of using
                                 /// this a lot.
                                 ///
                                 /// Possible errors from this method are `Error::Serialize`
-                                pub fn #set_fn_name(&mut self, item: Vec<#variant>>) -> ::error::Result<()> {
-                                    self.#ident = ::properties::to_vec(item)?;
+                                pub fn #set_fn_name(&mut self, item: Vec<#variant>>) -> ::activitystreams_traits::Result<()> {
+                                    self.#ident = ::activitystreams_traits::properties::to_vec(item)?;
                                     Ok(())
                                 }
+                            };
+
+                            quote! {
+                                #single_1
+                                #single_2
                             }
                         } else {
                             let single = quote! {
@@ -308,8 +328,8 @@ pub fn properties_derive(input: TokenStream) -> TokenStream {
                                 /// this a lot.
                                 ///
                                 /// Possible errors from this method are `Error::Deserialize`
-                                pub fn #fn_name(&self) -> ::error::Result<#variant> {
-                                    ::properties::from_value(&self.#ident)
+                                pub fn #fn_name(&self) -> ::activitystreams_traits::Result<#variant> {
+                                    ::activitystreams_traits::properties::from_value(&self.#ident)
                                 }
 
                                 /// Set a value in the given struct
@@ -318,8 +338,8 @@ pub fn properties_derive(input: TokenStream) -> TokenStream {
                                 /// lot.
                                 ///
                                 /// Possible errors from this method are `Error::Serialize`
-                                pub fn #set_fn_name(&mut self, item: #variant) -> ::error::Result<()> {
-                                    self.#ident = ::properties::to_value(item)?;
+                                pub fn #set_fn_name(&mut self, item: #variant) -> ::activitystreams_traits::Result<()> {
+                                    self.#ident = ::activitystreams_traits::properties::to_value(item)?;
                                     Ok(())
                                 }
                             };
@@ -327,29 +347,35 @@ pub fn properties_derive(input: TokenStream) -> TokenStream {
                             if is_functional {
                                 single
                             } else {
-                                quote! {
-                                    #single
-
+                                let plural_1 = quote! {
                                     /// Retrieve many values from the given struct
                                     ///
                                     /// This method deserializes the item from JSON, so be wary of using
                                     /// this a lot.
                                     ///
                                     /// Possible errors from this method are `Error::Deserialize`
-                                    pub fn #fn_plural(&self) -> ::error::Result<Vec<#variant>> {
-                                        ::properties::from_value(&self.#ident)
+                                    pub fn #fn_plural(&self) -> ::activitystreams_traits::Result<Vec<#variant>> {
+                                        ::activitystreams_traits::properties::from_value(&self.#ident)
                                     }
+                                };
 
+                                let plural_2 = quote! {
                                     /// Set many values in the given struct
                                     ///
                                     /// This method serializes the item to JSON, so be wary of using this
                                     /// a lot.
                                     ///
                                     /// Possible errors from this method are `Error::Serialize`
-                                    pub #set_fn_plural(&mut self, item: Vec<#variant>) -> ::error::Result<()> {
-                                        self.#ident = ::properties::to_value(item)?;
+                                    pub #set_fn_plural(&mut self, item: Vec<#variant>) -> ::activitystreams_traits::Result<()> {
+                                        self.#ident = ::activitystreams_traits::properties::to_value(item)?;
                                         Ok(())
                                     }
+                                };
+
+                                quote! {
+                                    #single
+                                    #plural_1
+                                    #plural_2
                                 }
                             }
                         }
@@ -362,8 +388,8 @@ pub fn properties_derive(input: TokenStream) -> TokenStream {
                             ///
                             /// Possible errors from this method are `Error::NotFound` and
                             /// `Error::Deserialize`
-                            pub fn #fn_name<T: #variant>(&self) -> ::error::Result<T> {
-                                ::properties::from_item(&self.#ident)
+                            pub fn #fn_name<T: #variant>(&self) -> ::activitystreams_traits::Result<T> {
+                                ::activitystreams_traits::properties::from_item(&self.#ident)
                             }
                         };
 
@@ -374,8 +400,8 @@ pub fn properties_derive(input: TokenStream) -> TokenStream {
                             /// lot.
                             ///
                             /// Possible errors from this method are `Error::Serialize`
-                            pub fn #set_fn_name<T: #variant>(&mut self, item: T) -> ::error::Result<()> {
-                                self.#ident = ::properties::to_item(item)?;
+                            pub fn #set_fn_name<T: #variant>(&mut self, item: T) -> ::activitystreams_traits::Result<()> {
+                                self.#ident = ::activitystreams_traits::properties::to_item(item)?;
                                 Ok(())
                             }
                         };
@@ -396,8 +422,8 @@ pub fn properties_derive(input: TokenStream) -> TokenStream {
                                 ///
                                 /// Possible errors from this method are `Error::NotFound` and
                                 /// `Error::Deserialize`
-                                pub fn #fn_plural<T: #variant>(&self) -> ::error::Result<Vec<T>> {
-                                    ::properties::from_item(&self.#ident)
+                                pub fn #fn_plural<T: #variant>(&self) -> ::activitystreams_traits::Result<Vec<T>> {
+                                    ::activitystreams_traits::properties::from_item(&self.#ident)
                                 }
                             };
 
@@ -408,8 +434,8 @@ pub fn properties_derive(input: TokenStream) -> TokenStream {
                                 /// this a lot.
                                 ///
                                 /// Possible errors from this method are `Error::Serialize`
-                                pub fn #set_fn_plural<T: #variant>(&mut self, item: Vec<T>) -> ::error::Result<()> {
-                                    self.#ident = ::properties::to_item(item)?;
+                                pub fn #set_fn_plural<T: #variant>(&mut self, item: Vec<T>) -> ::activitystreams_traits::Result<()> {
+                                    self.#ident = ::activitystreams_traits::properties::to_item(item)?;
                                     Ok(())
                                 }
                             };
@@ -428,8 +454,8 @@ pub fn properties_derive(input: TokenStream) -> TokenStream {
                             /// this a lot.
                             ///
                             /// Possible errors from this method are `Error::Deserialize`
-                            pub fn #fn_name<T: #variant>(&self) -> ::error::Result<Vec<T>> {
-                                ::properties::from_vec(&self.#ident)
+                            pub fn #fn_name<T: #variant>(&self) -> ::activitystreams_traits::Result<Vec<T>> {
+                                ::activitystreams_traits::properties::from_vec(&self.#ident)
                             }
                         };
 
@@ -440,8 +466,8 @@ pub fn properties_derive(input: TokenStream) -> TokenStream {
                             /// this a lot.
                             ///
                             /// Possible errors from this method are `Error::Serialize`
-                            pub fn #set_fn_name<T: #variant>(&mut self, item: Vec<T>) -> ::error::Result<()> {
-                                self.#ident = ::properties::to_vec(item)?;
+                            pub fn #set_fn_name<T: #variant>(&mut self, item: Vec<T>) -> ::activitystreams_traits::Result<()> {
+                                self.#ident = ::activitystreams_traits::properties::to_vec(item)?;
                                 Ok(())
                             }
                         };
@@ -458,8 +484,8 @@ pub fn properties_derive(input: TokenStream) -> TokenStream {
                             /// this a lot.
                             ///
                             /// Possible errors from this method are `Error::Deserialize`
-                            pub fn #fn_name<T: #variant>(&self) -> ::error::Result<T> {
-                                ::properties::from_value(&self.#ident)
+                            pub fn #fn_name<T: #variant>(&self) -> ::activitystreams_traits::Result<T> {
+                                ::activitystreams_traits::properties::from_value(&self.#ident)
                             }
                         };
 
@@ -470,8 +496,8 @@ pub fn properties_derive(input: TokenStream) -> TokenStream {
                             /// lot.
                             ///
                             /// Possible errors from this method are `Error::Serialize`
-                            pub fn #set_fn_name<T: #variant>(&mut self, item: T) -> ::error::Result<()> {
-                                self.#ident = ::properties::to_value(item)?;
+                            pub fn #set_fn_name<T: #variant>(&mut self, item: T) -> ::activitystreams_traits::Result<()> {
+                                self.#ident = ::activitystreams_traits::properties::to_value(item)?;
                                 Ok(())
                             }
                         };
@@ -491,8 +517,8 @@ pub fn properties_derive(input: TokenStream) -> TokenStream {
                                 /// this a lot.
                                 ///
                                 /// Possible errors from this method are `Error::Deserialize`
-                                pub fn #fn_plural<T: #variant>(&self) -> ::error::Result<Vec<T>> {
-                                    ::properties::from_value(&self.#ident)
+                                pub fn #fn_plural<T: #variant>(&self) -> ::activitystreams_traits::Result<Vec<T>> {
+                                    ::activitystreams_traits::properties::from_value(&self.#ident)
                                 }
                             };
 
@@ -503,8 +529,8 @@ pub fn properties_derive(input: TokenStream) -> TokenStream {
                                 /// a lot.
                                 ///
                                 /// Possible errors from this method are `Error::Serialize`
-                                pub fn #set_fn_plural<T: #variant>(&mut self, item: Vec<T>) -> ::error::Result<()> {
-                                    self.#ident = ::properties::to_value(item)?;
+                                pub fn #set_fn_plural<T: #variant>(&mut self, item: Vec<T>) -> ::activitystreams_traits::Result<()> {
+                                    self.#ident = ::activitystreams_traits::properties::to_value(item)?;
                                     Ok(())
                                 }
                             };

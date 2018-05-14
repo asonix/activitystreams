@@ -1,6 +1,6 @@
 [package]
 name = "activitystreams"
-description = "Derive macros for activitystreams"
+description = "Activity Streams in Rust"
 version = "0.1.0"
 license = "GPL-3.0"
 authors = ["asonix <asonix.dev@gmail.com>"]
@@ -8,10 +8,12 @@ repository = "https://github.com/asonix/activitystreams"
 keywords = ["activitystreams", "activitypub"]
 
 [dependencies]
-activitystreams-derive = { version = "0.1", path = "activitystreams-derive" }
-chrono = { version = "0.4", features = ["serde"] }
-failure = "0.1"
-mime = "0.3"
-serde = "1.0"
-serde_derive = "1.0"
-serde_json = "1.0"
+activitystreams-traits = { version = "0.1", path = "activitystreams-traits" }
+activitystreams-types = { version = "0.1", path = "activitystreams-types" }
+
+[workspace]
+members = [
+    "activitystreams-derive",
+    "activitystreams-traits",
+    "activitystreams-types",
+]
