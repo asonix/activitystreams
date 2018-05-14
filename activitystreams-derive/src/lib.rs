@@ -51,7 +51,8 @@
 //!     #[activitystreams(ab(Object, Link))]
 //!     pub context: Option<serde_json::Value>,
 //!
-//!     /// Derive getters and setters for context with Link and Object traits.
+//!     /// Use the UnitString MyKind to enforce the type of the object by "SomeKind"
+//!     #[serde(rename = "type")]
 //!     pub kind: MyKind,
 //!
 //!     /// Derive getters and setters for required_key with String type.
