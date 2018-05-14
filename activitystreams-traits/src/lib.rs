@@ -29,18 +29,24 @@
 //! extern crate serde;
 //! #[macro_use]
 //! extern crate serde_derive;
+//! extern crate serde_json;
 //!
 //! use activitystreams_traits::{Object, Actor};
 //!
 //! #[derive(Clone, Debug, Default, Deserialize, Serialize)]
 //! #[serde(rename_all = "camelCase")]
 //! pub struct Persona {
+//!     #[serde(rename = "@context")]
+//!     context: serde_json::Value,
+//!
 //!     #[serde(rename = "type")]
 //!     kind: String,
 //! }
 //!
 //! impl Object for Persona {}
 //! impl Actor for Persona {}
+//!
+//! # fn main() {}
 //! ```
 
 #[macro_use]
