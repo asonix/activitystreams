@@ -17,23 +17,23 @@
  * along with ActivityStreams Types.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-//! Namespace for properties of standard object types
+//! Namespace for properties of standard collection types
 //!
 //! To use these properties in your own types, you can flatten them into your struct with serde:
 //!
 //! ```rust
-//! # extern crate activitystreams;
-//! # extern crate serde;
-//! # #[macro_use]
-//! # extern crate serde_derive;
-//! #
-//! # use activitystreams::{
-//! #   collection::properties::CollectionProperties,
-//! #   object::properties::ObjectProperties,
-//! #   Collection,
-//! #   Object
-//! # };
-//! #
+//! extern crate activitystreams_traits;
+//! extern crate activitystreams_types;
+//! extern crate serde;
+//! #[macro_use]
+//! extern crate serde_derive;
+//!
+//! use activitystreams_traits::{Collection, Object};
+//! use activitystreams_types::{
+//!   collection::properties::CollectionProperties,
+//!   object::properties::ObjectProperties,
+//! };
+//!
 //! #[derive(Clone, Debug, Serialize, Deserialize)]
 //! #[serde(rename_all = "camelCase")]
 //! pub struct MyCollection {

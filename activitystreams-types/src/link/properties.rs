@@ -22,13 +22,15 @@
 //! To use these properties in your own types, you can flatten them into your struct with serde:
 //!
 //! ```rust
-//! # extern crate activitystreams;
-//! # extern crate serde;
-//! # #[macro_use]
-//! # extern crate serde_derive;
-//! #
-//! # use activitystreams::{link::properties::LinkProperties, Link};
-//! #
+//! extern crate activitystreams_traits;
+//! extern crate activitystreams_types;
+//! extern crate serde;
+//! #[macro_use]
+//! extern crate serde_derive;
+//!
+//! use activitystreams_traits::Link;
+//! use activitystreams_types::link::properties::LinkProperties;
+//!
 //! #[derive(Clone, Debug, Serialize, Deserialize)]
 //! #[serde(rename_all = "camelCase")]
 //! pub struct MyLink {

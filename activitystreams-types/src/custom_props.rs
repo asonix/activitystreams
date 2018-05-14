@@ -32,8 +32,8 @@ use activitystreams_traits::{
 ///
 /// ## Example
 /// ```rust
-/// use activitystreams::{
-///     custom_props::CustomLink,
+/// use activitystreams_types::{
+///     CustomLink,
 ///     link::Mention,
 /// };
 ///
@@ -79,8 +79,8 @@ where
 ///
 /// ## Example
 /// ```rust
-/// use activitystreams::{
-///     custom_props::CustomObject,
+/// use activitystreams_types::{
+///     CustomObject,
 ///     object::Video,
 /// };
 ///
