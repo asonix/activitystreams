@@ -19,19 +19,22 @@
 
 use serde::{de::DeserializeOwned, ser::Serialize};
 
-mod kind;
-mod properties;
-pub use self::kind::*;
-pub use self::properties::*;
+pub mod kind;
+pub mod properties;
+use self::kind::*;
+use self::properties::*;
 
+/// The Link is the secondary base type for the Activity Streams vocabulary.
 pub trait Link: DeserializeOwned + Serialize {}
 
+/// A specialized Link that represents an @mention.
 #[derive(Clone, Debug, Default, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Mention {
     #[serde(rename = "type")]
     kind: MentionType,
 
+    /// Adds all valid link properties to this struct
     #[serde(flatten)]
     pub link_props: LinkProperties,
 }

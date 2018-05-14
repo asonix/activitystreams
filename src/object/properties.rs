@@ -228,12 +228,12 @@ pub struct ObjectProperties {
     #[activitystreams(concrete(String, UtcTime), functional)]
     pub published: Option<serde_json::Value>,
 
-    /// Identifies a Collection containing objects considered to be responses to this object.
+    /// Identifies a `Collection` containing objects considered to be responses to this object.
     ///
     /// - Range: `Object` | `Link`
     /// - Functional: false
     #[serde(skip_serializing_if = "Option::is_none")]
-    #[activitystreams(concrete(Collection), functional)]
+    #[activitystreams(ab(Collection), functional)]
     pub replies: Option<serde_json::Value>,
 
     /// The date and time describing the actual or expected starting time of the object.
@@ -319,9 +319,9 @@ pub struct ObjectProperties {
     #[activitystreams(ab(Object, Link))]
     pub bcc: Option<serde_json::Value>,
 
-    /// When used on a Link, identifies the MIME media type of the referenced resource.
+    /// When used on an `Object`, identifies the MIME media type of the value of the content
+    /// property.
     ///
-    /// When used on an Object, identifies the MIME media type of the value of the content property.
     /// If not specified, the content property is assumed to contain text/html content.
     ///
     /// - Range: `Mime Media Type`
@@ -334,7 +334,8 @@ pub struct ObjectProperties {
     /// When the object describes a time-bound resource, such as an audio or video, a meeting, etc,
     /// the duration property indicates the object's approximate duration.
     ///
-    /// The value MUST be expressed as an xsd:duration as defined by [ xmlschema11-2], section
+    /// The value MUST be expressed as an xsd:duration as defined by
+    /// [[xmlschema11-2](https://www.w3.org/TR/xmlschema11-2/)], section
     /// 3.3.6 (e.g. a period of 5 seconds is represented as "PT5S").
     ///
     /// - Range: `xsd:duration`

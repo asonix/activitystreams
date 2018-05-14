@@ -46,6 +46,7 @@ pub mod properties;
 
 pub use self::activity::{Activity, IntransitiveActivity};
 pub use self::actor::Actor;
+pub use self::collection::{Collection, CollectionPage};
 pub use self::custom_props::{CustomLink, CustomObject};
 pub use self::error::Error;
 pub use self::link::Link;

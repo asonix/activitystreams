@@ -17,12 +17,15 @@
  * along with ActivityStreams.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+//! Namespace for Unit Structs that serialize to strings
+
 use std::fmt;
 
 use serde::{
     de::{self, Deserialize, Deserializer, Visitor}, ser::{Serialize, Serializer},
 };
 
+/// A Unit Struct that represents the string "Mention"
 #[derive(Clone, Debug, Default, UnitString)]
 #[activitystreams(Mention)]
 pub struct MentionType;

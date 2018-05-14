@@ -17,6 +17,8 @@
  * along with ActivityStreams.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+//! Namespace for Object types
+
 use serde::{de::DeserializeOwned, ser::Serialize};
 
 pub mod kind;
