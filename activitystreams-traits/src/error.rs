@@ -20,7 +20,7 @@
 use std::result;
 
 /// The Error type
-#[derive(Copy, Clone, Debug, Fail)]
+#[derive(Copy, Clone, Debug, Eq, Fail, PartialEq)]
 pub enum Error {
     /// This error occurs when an Activity Streams type does not contain a requested value
     #[fail(display = "Key not present")]

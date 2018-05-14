@@ -17,13 +17,134 @@
  * along with ActivityStreams.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+//! ActivityStreams
+//!
+//! A set of Traits and Types that make up the Activity Streams specification
+//!
+//! ## Examples
+//!
+//! ### Basic
+//!
+//! ```rust
+//! extern crate activitystreams;
+//! extern crate failure;
+//! extern crate serde;
+//! #[macro_use]
+//! extern crate serde_derive;
+//! extern crate serde_json;
+//!
+//! use activitystreams::{context, Object, Actor, object::Profile};
+//! use failure::Error;
+//!
+//! #[derive(Clone, Debug, Default, Deserialize, Serialize)]
+//! #[serde(rename_all = "camelCase")]
+//! pub struct Persona {
+//!     #[serde(rename = "@context")]
+//!     context: serde_json::Value,
+//!
+//!     #[serde(rename = "type")]
+//!     kind: String,
+//! }
+//!
+//! impl Object for Persona {}
+//! impl Actor for Persona {}
+//!
+//! fn run() -> Result<(), Error> {
+//!     let mut profile = Profile::default();
+//!
+//!     profile.profile.set_describes_object(Persona {
+//!         context: serde_json::to_value(context())?,
+//!
+//!         kind: "Persona".to_owned(),
+//!     })?;
+//!
+//!     profile.object_props.set_context_object(context())?;
+//!
+//!     let profile_string = serde_json::to_string(&profile)?;
+//!
+//!     let profile: Profile = serde_json::from_str(&profile_string)?;
+//!
+//!     Ok(())
+//! }
+//! #
+//! # fn main() {
+//! #   run().unwrap();
+//! # }
+//! ```
+//!
+//! ### Advanced
+//!
+//! ```rust
+//! #[macro_use]
+//! extern crate activitystreams_derive;
+//! extern crate activitystreams_traits;
+//! extern crate activitystreams_types;
+//! extern crate failure;
+//! extern crate serde;
+//! #[macro_use]
+//! extern crate serde_derive;
+//! extern crate serde_json;
+//!
+//! use activitystreams_traits::{Link, Object};
+//! use activitystreams_types::{CustomLink, link::Mention};
+//! use failure::Error;
+//!
+//! /// Using the UnitString derive macro
+//! ///
+//! /// This macro implements Serialize and Deserialize for the given type, making this type
+//! /// represent the string "SomeKind" in JSON.
+//! #[derive(Clone, Debug, Default, UnitString)]
+//! #[activitystreams(SomeKind)]
+//! pub struct MyKind;
+//!
+//! /// Using the Properties derive macro
+//! ///
+//! /// This macro generates getters and setters for the associated fields.
+//! #[derive(Clone, Debug, Default, Deserialize, Serialize, Properties)]
+//! #[serde(rename_all = "camelCase")]
+//! pub struct MyProperties {
+//!     /// Derive getters and setters for @context with Link and Object traits.
+//!     #[serde(rename = "@context")]
+//!     #[activitystreams(ab(Object, Link))]
+//!     pub context: Option<serde_json::Value>,
+//!
+//!     /// Use the UnitString MyKind to enforce the type of the object by "SomeKind"
+//!     pub kind: MyKind,
+//!
+//!     /// Derive getters and setters for required_key with String type.
+//!     ///
+//!     /// In the Activity Streams spec, 'functional' means there can only be one item for this
+//!     /// key. This means all fields not labeled 'functional' can also be serialized/deserialized
+//!     /// as Vec<T>.
+//!     #[activitystreams(concrete(String), functional)]
+//!     pub required_key: serde_json::Value,
+//! }
+//!
+//! fn run() -> Result<(), Error> {
+//!     let mut props = MyProperties::default();
+//!
+//!     props.set_required_key_string("Hey".to_owned())?;
+//!
+//!     let my_link = CustomLink::new(Mention::default(), props);
+//!
+//!     let my_link_string = serde_json::to_string(&my_link)?;
+//!
+//!     let my_link: CustomLink<Mention, MyProperties> = serde_json::from_str(&my_link_string)?;
+//!
+//!     Ok(())
+//! }
+//! # fn main() {
+//! #   run().unwrap();
+//! # }
+//! ```
+
 extern crate activitystreams_traits;
 extern crate activitystreams_types;
 
 pub mod activity;
 pub mod actor;
 pub mod collection;
-pub mod error;
+mod error;
 pub mod link;
 pub mod object;
 pub mod properties;
@@ -31,6 +152,7 @@ pub mod properties;
 pub use self::activity::{Activity, IntransitiveActivity};
 pub use self::actor::Actor;
 pub use self::collection::{Collection, CollectionPage};
-pub use self::error::Error;
+pub use self::error::{Error, Result};
 pub use self::link::Link;
 pub use self::object::Object;
+pub use activitystreams_types::context;

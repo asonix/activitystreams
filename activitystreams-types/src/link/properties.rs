@@ -84,6 +84,18 @@ pub struct LinkProperties {
     #[activitystreams(concrete(String), functional)]
     pub id: Option<serde_json::Value>,
 
+    /// Identifies the context within which the object exists or an activity was performed.
+    ///
+    /// The notion of "context" used is intentionally vague. The intended function is to serve as a
+    /// means of grouping objects and activities that share a common originating context or purpose.
+    /// An example could be all activities relating to a common project or event.
+    ///
+    /// - Range: `Object` | `Link`
+    /// - Functional: false
+    #[serde(skip_serializing_if = "Option::is_none", rename = "@context")]
+    #[activitystreams(ab(Object, Link))]
+    pub context: Option<serde_json::Value>,
+
     // TODO: rdf:langString
     /// A simple, human-readable, plain-text name for the object.
     ///

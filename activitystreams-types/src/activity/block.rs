@@ -23,21 +23,43 @@ use serde_json;
 use super::{kind::BlockType, properties::ActivityProperties};
 use object::properties::ObjectProperties;
 
+/// Indicates that the actor is blocking the object.
+///
+/// Blocking is a stronger form of Ignore. The typical use is to support social systems that allow
+/// one user to block activities or content of other users. The target and origin typically have no
+/// defined meaning.
 #[derive(Clone, Debug, Default, Deserialize, Serialize, Properties)]
 #[serde(rename_all = "camelCase")]
 pub struct Block {
     #[serde(rename = "type")]
-    kind: BlockType,
+    pub kind: BlockType,
 
+    /// Describes one or more entities that either performed or are expected to perform the
+    /// activity.
+    ///
+    /// Any single activity can have multiple actors. The actor MAY be specified using an indirect
+    /// Link.
+    ///
+    /// - Range: `Object` | `Link`
+    /// - Functional: false
     #[activitystreams(ab(Object, Link))]
-    actor: serde_json::Value,
+    pub actor: serde_json::Value,
 
+    /// When used within an Activity, describes the direct object of the activity.
+    ///
+    /// For instance, in the activity "John added a movie to his wishlist", the object of the
+    /// activity is the movie added.
+    ///
+    /// - Range: `Object` | `Link`
+    /// - Functional: false
     #[activitystreams(ab(Object, Link))]
-    object: serde_json::Value,
+    pub object: serde_json::Value,
 
+    /// Adds all valid object properties to this struct
     #[serde(flatten)]
     pub object_props: ObjectProperties,
 
+    /// Adds all valid activity properties to this struct
     #[serde(flatten)]
     pub activity_props: ActivityProperties,
 }

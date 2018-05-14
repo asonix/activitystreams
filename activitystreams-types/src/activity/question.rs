@@ -23,23 +23,47 @@ use serde_json;
 use super::{kind::QuestionType, properties::ActivityProperties};
 use object::properties::ObjectProperties;
 
+/// Represents a question being asked.
+///
+/// Question objects are an extension of IntransitiveActivity. That is, the Question object is an
+/// Activity, but the direct object is the question itself and therefore it would not contain an
+/// object property.
+///
+/// Either of the anyOf and oneOf properties MAY be used to express possible answers, but a
+/// Question object MUST NOT have both properties.
 #[derive(Clone, Debug, Default, Deserialize, Serialize, Properties)]
 #[serde(rename_all = "camelCase")]
 pub struct Question {
     #[serde(rename = "type")]
-    kind: QuestionType,
+    pub kind: QuestionType,
 
-    #[serde(skip_serializing_if = "Vec::is_empty", default = "Vec::new")]
+    /// Identifies an exclusive option for a Question.
+    ///
+    /// Use of `one_of` implies that the Question can have only a single answer. To indicate that a
+    /// `Question` can have multiple answers, use `any_of`.
+    ///
+    /// - Range: `Object` | `Link`
+    /// - Functional: false
+    #[serde(skip_serializing_if = "Option::is_none")]
     #[activitystreams(ab(Object, Link))]
-    one_of: Vec<serde_json::Value>,
+    pub one_of: Option<serde_json::Value>,
 
-    #[serde(skip_serializing_if = "Vec::is_empty", default = "Vec::new")]
+    /// Identifies an inclusive option for a Question.
+    ///
+    /// Use of `any_of` implies that the Question can have multiple answers. To indicate that a
+    /// `Question` can have only one answer, use `one_of`.
+    ///
+    /// - Range: `Object` | `Link`
+    /// - Functional: false
+    #[serde(skip_serializing_if = "Option::is_none")]
     #[activitystreams(ab(Object, Link))]
-    any_of: Vec<serde_json::Value>,
+    pub any_of: Option<serde_json::Value>,
 
+    /// Adds all valid object properties to this struct
     #[serde(flatten)]
     pub object_props: ObjectProperties,
 
+    /// Adds all valid activity properties to this struct
     #[serde(flatten)]
     pub activity_props: ActivityProperties,
 }

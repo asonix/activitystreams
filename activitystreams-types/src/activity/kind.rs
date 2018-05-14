@@ -17,6 +17,8 @@
  * along with ActivityStreams Types.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+//! Namespace for Unit Structs that serialize to strings
+
 #[derive(Clone, Debug, Default, UnitString)]
 #[activitystreams(Accept)]
 pub struct AcceptType;

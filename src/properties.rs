@@ -17,4 +17,6 @@
  * along with ActivityStreams.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+//! Helpers for translating properties between `serde_json::Value` and concrete types
+
 pub use activitystreams_traits::properties::*;

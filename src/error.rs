@@ -17,4 +17,10 @@
  * along with ActivityStreams.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-pub use activitystreams_traits::{Error, Result};
+//! Error traits and types
+
+/// The Error type
+pub use activitystreams_traits::Error;
+
+/// An alias for Result<T, Error>
+pub use activitystreams_traits::Result;

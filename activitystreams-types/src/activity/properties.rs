@@ -59,14 +59,28 @@
 use activitystreams_traits::{Link, Object};
 use serde_json;
 
+/// Activity objects are specializations of the base Object type that provide information about
+/// actions that have either already occurred, are in the process of occurring, or may occur in the
+/// future.
 #[derive(Clone, Debug, Default, Deserialize, Serialize, Properties)]
 #[serde(rename_all = "camelCase")]
 pub struct ActivityProperties {
+    /// Describes the result of the activity.
+    ///
+    /// For instance, if a particular action results in the creation of a new resource, the result
+    /// property can be used to describe that new resource.
+    ///
+    /// - Range: `Object` | `Link`
+    /// - Funcitonal: false
     #[serde(skip_serializing_if = "Option::is_none")]
     #[activitystreams(ab(Object, Link))]
-    result: Option<serde_json::Value>,
+    pub result: Option<serde_json::Value>,
 
+    /// Identifies one or more objects used (or to be used) in the completion of an `Activity`.
+    ///
+    /// - Range: `Object` | `Link`
+    /// - Funcitonal: false
     #[serde(skip_serializing_if = "Option::is_none")]
     #[activitystreams(ab(Object, Link))]
-    instrument: Option<serde_json::Value>,
+    pub instrument: Option<serde_json::Value>,
 }

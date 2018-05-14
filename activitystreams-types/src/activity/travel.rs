@@ -23,26 +23,57 @@ use serde_json;
 use super::{kind::TravelType, properties::ActivityProperties};
 use object::properties::ObjectProperties;
 
+/// Indicates that the actor is traveling to target from origin.
+///
+/// Travel is an IntransitiveObject whose actor specifies the direct object. If the target or
+/// origin are not specified, either can be determined by context.
 #[derive(Clone, Debug, Default, Deserialize, Serialize, Properties)]
 #[serde(rename_all = "camelCase")]
 pub struct Travel {
     #[serde(rename = "type")]
-    kind: TravelType,
+    pub kind: TravelType,
 
+    /// Describes one or more entities that either performed or are expected to perform the
+    /// activity.
+    ///
+    /// Any single activity can have multiple actors. The actor MAY be specified using an indirect
+    /// Link.
+    ///
+    /// - Range: `Object` | `Link`
+    /// - Functional: false
     #[activitystreams(ab(Object, Link))]
-    actor: serde_json::Value,
+    pub actor: serde_json::Value,
 
+    /// Describes an indirect object of the activity from which the activity is directed.
+    ///
+    /// The precise meaning of the origin is the object of the English preposition "from". For
+    /// instance, in the activity "John moved an item to List B from List A", the origin of the
+    /// activity is "List A".
+    ///
+    /// - Range: `Object` | `Link`
+    /// - Functional: false
     #[serde(skip_serializing_if = "Option::is_none")]
     #[activitystreams(ab(Object, Link))]
-    origin: Option<serde_json::Value>,
+    pub origin: Option<serde_json::Value>,
 
+    /// Describes the indirect object, or target, of the activity.
+    ///
+    /// The precise meaning of the target is largely dependent on the type of action being
+    /// described but will often be the object of the English preposition "to". For instance, in
+    /// the activity "John added a movie to his wishlist", the target of the activity is John's
+    /// wishlist. An activity can have more than one target
+    ///
+    /// - Range: `Object` | `Link`
+    /// - Functional: false
     #[serde(skip_serializing_if = "Option::is_none")]
     #[activitystreams(ab(Object, Link))]
-    target: Option<serde_json::Value>,
+    pub target: Option<serde_json::Value>,
 
+    /// Adds all valid object properties to this struct
     #[serde(flatten)]
     pub object_props: ObjectProperties,
 
+    /// Adds all valid activity properties to this struct
     #[serde(flatten)]
     pub activity_props: ActivityProperties,
 }
