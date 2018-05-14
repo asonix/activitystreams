@@ -5,6 +5,7 @@ version = "0.1.0"
 license = "GPL-3.0"
 authors = ["asonix <asonix.dev@gmail.com>"]
 repository = "https://github.com/asonix/activitystreams"
+readme = "README.md"
 keywords = ["activitystreams", "activitypub"]
 
 [dependencies]

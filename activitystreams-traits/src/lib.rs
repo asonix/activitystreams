@@ -17,6 +17,32 @@
  * along with ActivityStreams Traits.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+//! Traits for Activity Streams
+//!
+//! These traits don't provide any functionality other than anotations for types created in other
+//! projects. See the `activitystreams-types` crate for examples of how these traits could be used.
+//!
+//! ## Examples
+//!
+//! ```rust
+//! extern crate activitystreams_traits;
+//! extern crate serde;
+//! #[macro_use]
+//! extern crate serde_derive;
+//!
+//! use activitystreams_traits::{Object, Actor};
+//!
+//! #[derive(Clone, Debug, Default, Deserialize, Serialize)]
+//! #[serde(rename_all = "camelCase")]
+//! pub struct Persona {
+//!     #[serde(rename = "type")]
+//!     kind: String,
+//! }
+//!
+//! impl Object for Persona {}
+//! impl Actor for Persona {}
+//! ```
+
 #[macro_use]
 extern crate failure;
 extern crate serde;

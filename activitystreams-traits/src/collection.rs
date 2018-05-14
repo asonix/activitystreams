@@ -21,7 +21,23 @@ use object::Object;
 
 /// A Collection is a subtype of `Object` that represents ordered or unordered sets of `Object` or
 /// `Link` instances.
+///
+/// The items within a Collection can be ordered or unordered. The OrderedCollection type MAY be
+/// used to identify a Collection whose items are always ordered. In the JSON serialization, the
+/// unordered items of a Collection are represented using the items property while ordered items
+/// are represented using the orderedItems property.
+///
+/// `UnorderedCollection` and `OrderedCollection` types are provided by the `activitystreams-types`
+/// crate.
 pub trait Collection: Object {}
 
 /// Used to represent distinct subsets of items from a Collection.
+///
+/// A `Collection` can contain a large number of items. Often, it becomes impractical for an
+/// implementation to serialize every item contained by a `Collection` using the items (or
+/// `ordered_items`) property alone. In such cases, the items within a `Collection` can be divided
+/// into distinct subsets or "pages". A page is identified using the `CollectionPage` type.
+///
+/// `UnorderedCollectionPage` and `OrderedCollectionPage` types are provied by the
+/// `activitystreams-types` crate.
 pub trait CollectionPage: Collection {}
