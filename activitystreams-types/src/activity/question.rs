@@ -17,10 +17,11 @@
  * along with ActivityStreams Types.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-use activitystreams_traits::{Activity, IntransitiveActivity, Link, Object};
-use serde_json;
+use activitystreams_traits::{Activity, IntransitiveActivity, Object};
 
-use super::{kind::QuestionType, properties::ActivityProperties};
+use super::{
+    kind::QuestionType, properties::{ActivityProperties, QuestionProperties},
+};
 use object::properties::ObjectProperties;
 
 /// Represents a question being asked.
@@ -37,27 +38,9 @@ pub struct Question {
     #[serde(rename = "type")]
     pub kind: QuestionType,
 
-    /// Identifies an exclusive option for a Question.
-    ///
-    /// Use of `one_of` implies that the Question can have only a single answer. To indicate that a
-    /// `Question` can have multiple answers, use `any_of`.
-    ///
-    /// - Range: `Object` | `Link`
-    /// - Functional: false
-    #[serde(skip_serializing_if = "Option::is_none")]
-    #[activitystreams(ab(Object, Link))]
-    pub one_of: Option<serde_json::Value>,
-
-    /// Identifies an inclusive option for a Question.
-    ///
-    /// Use of `any_of` implies that the Question can have multiple answers. To indicate that a
-    /// `Question` can have only one answer, use `one_of`.
-    ///
-    /// - Range: `Object` | `Link`
-    /// - Functional: false
-    #[serde(skip_serializing_if = "Option::is_none")]
-    #[activitystreams(ab(Object, Link))]
-    pub any_of: Option<serde_json::Value>,
+    /// Adds all valid question properties to this struct
+    #[serde(flatten)]
+    pub question_props: QuestionProperties,
 
     /// Adds all valid object properties to this struct
     #[serde(flatten)]

@@ -6,7 +6,7 @@ First, add the crate to your cargo.toml
 ```toml
 # Cargo.toml
 
-activitystreams-types = "0.1"
+activitystreams-types = "0.2"
 ```
 
 Then use it in your project!

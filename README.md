@@ -8,7 +8,7 @@ For basic use, add the following to your Cargo.toml
 ```toml
 # Cargo.toml
 
-activitystreams = "0.1"
+activitystreams = "0.2"
 ```
 
 And then use it in your project
