@@ -20,9 +20,10 @@
 use activitystreams_traits::{Activity, Object};
 
 use super::{
-    kind::OfferType, properties::{ActivityProperties, OfferProperties},
+    kind::OfferType,
+    properties::{ActivityExt, ActivityProperties, OfferProperties},
 };
-use object::properties::ObjectProperties;
+use object::properties::{ObjectExt, ObjectProperties};
 
 /// Indicates that the actor is offering the object.
 ///
@@ -47,4 +48,22 @@ pub struct Offer {
 }
 
 impl Object for Offer {}
+impl ObjectExt for Offer {
+    fn props(&self) -> &ObjectProperties {
+        &self.object_props
+    }
+
+    fn props_mut(&mut self) -> &mut ObjectProperties {
+        &mut self.object_props
+    }
+}
 impl Activity for Offer {}
+impl ActivityExt for Offer {
+    fn props(&self) -> &ActivityProperties {
+        &self.activity_props
+    }
+
+    fn props_mut(&mut self) -> &mut ActivityProperties {
+        &mut self.activity_props
+    }
+}

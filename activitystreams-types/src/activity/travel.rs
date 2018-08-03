@@ -20,9 +20,10 @@
 use activitystreams_traits::{Activity, IntransitiveActivity, Object};
 
 use super::{
-    kind::TravelType, properties::{ActivityProperties, TravelProperties},
+    kind::TravelType,
+    properties::{ActivityExt, ActivityProperties, TravelProperties},
 };
-use object::properties::ObjectProperties;
+use object::properties::{ObjectExt, ObjectProperties};
 
 /// Indicates that the actor is traveling to target from origin.
 ///
@@ -48,5 +49,23 @@ pub struct Travel {
 }
 
 impl Object for Travel {}
+impl ObjectExt for Travel {
+    fn props(&self) -> &ObjectProperties {
+        &self.object_props
+    }
+
+    fn props_mut(&mut self) -> &mut ObjectProperties {
+        &mut self.object_props
+    }
+}
 impl Activity for Travel {}
+impl ActivityExt for Travel {
+    fn props(&self) -> &ActivityProperties {
+        &self.activity_props
+    }
+
+    fn props_mut(&mut self) -> &mut ActivityProperties {
+        &mut self.activity_props
+    }
+}
 impl IntransitiveActivity for Travel {}

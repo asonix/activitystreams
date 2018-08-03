@@ -20,9 +20,10 @@
 use activitystreams_traits::{Activity, Object};
 
 use super::{
-    kind::TentativeRejectType, properties::{ActivityProperties, TentativeRejectProperties},
+    kind::TentativeRejectType,
+    properties::{ActivityExt, ActivityProperties, TentativeRejectProperties},
 };
-use object::properties::ObjectProperties;
+use object::properties::{ObjectExt, ObjectProperties};
 
 /// A specialization of Reject in which the rejection is considered tentative.
 #[derive(Clone, Debug, Default, Deserialize, Serialize, Properties)]
@@ -45,4 +46,22 @@ pub struct TentativeReject {
 }
 
 impl Object for TentativeReject {}
+impl ObjectExt for TentativeReject {
+    fn props(&self) -> &ObjectProperties {
+        &self.object_props
+    }
+
+    fn props_mut(&mut self) -> &mut ObjectProperties {
+        &mut self.object_props
+    }
+}
 impl Activity for TentativeReject {}
+impl ActivityExt for TentativeReject {
+    fn props(&self) -> &ActivityProperties {
+        &self.activity_props
+    }
+
+    fn props_mut(&mut self) -> &mut ActivityProperties {
+        &mut self.activity_props
+    }
+}

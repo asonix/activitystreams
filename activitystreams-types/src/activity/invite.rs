@@ -20,9 +20,10 @@
 use activitystreams_traits::{Activity, Object};
 
 use super::{
-    kind::InviteType, properties::{ActivityProperties, InviteProperties},
+    kind::InviteType,
+    properties::{ActivityExt, ActivityProperties, InviteProperties},
 };
-use object::properties::ObjectProperties;
+use object::properties::{ObjectExt, ObjectProperties};
 
 /// A specialization of Offer in which the actor is extending an invitation for the object to the
 /// target.
@@ -46,4 +47,22 @@ pub struct Invite {
 }
 
 impl Object for Invite {}
+impl ObjectExt for Invite {
+    fn props(&self) -> &ObjectProperties {
+        &self.object_props
+    }
+
+    fn props_mut(&mut self) -> &mut ObjectProperties {
+        &mut self.object_props
+    }
+}
 impl Activity for Invite {}
+impl ActivityExt for Invite {
+    fn props(&self) -> &ActivityProperties {
+        &self.activity_props
+    }
+
+    fn props_mut(&mut self) -> &mut ActivityProperties {
+        &mut self.activity_props
+    }
+}

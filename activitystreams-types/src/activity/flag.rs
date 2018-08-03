@@ -20,9 +20,10 @@
 use activitystreams_traits::{Activity, Object};
 
 use super::{
-    kind::FlagType, properties::{ActivityProperties, FlagProperties},
+    kind::FlagType,
+    properties::{ActivityExt, ActivityProperties, FlagProperties},
 };
-use object::properties::ObjectProperties;
+use object::properties::{ObjectExt, ObjectProperties};
 
 /// Indicates that the actor is "flagging" the object.
 ///
@@ -48,4 +49,22 @@ pub struct Flag {
 }
 
 impl Object for Flag {}
+impl ObjectExt for Flag {
+    fn props(&self) -> &ObjectProperties {
+        &self.object_props
+    }
+
+    fn props_mut(&mut self) -> &mut ObjectProperties {
+        &mut self.object_props
+    }
+}
 impl Activity for Flag {}
+impl ActivityExt for Flag {
+    fn props(&self) -> &ActivityProperties {
+        &self.activity_props
+    }
+
+    fn props_mut(&mut self) -> &mut ActivityProperties {
+        &mut self.activity_props
+    }
+}

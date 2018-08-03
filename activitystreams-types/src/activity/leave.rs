@@ -20,9 +20,10 @@
 use activitystreams_traits::{Activity, Object};
 
 use super::{
-    kind::LeaveType, properties::{ActivityProperties, LeaveProperties},
+    kind::LeaveType,
+    properties::{ActivityExt, ActivityProperties, LeaveProperties},
 };
-use object::properties::ObjectProperties;
+use object::properties::{ObjectExt, ObjectProperties};
 
 /// Indicates that the actor has left the object.
 ///
@@ -47,4 +48,22 @@ pub struct Leave {
 }
 
 impl Object for Leave {}
+impl ObjectExt for Leave {
+    fn props(&self) -> &ObjectProperties {
+        &self.object_props
+    }
+
+    fn props_mut(&mut self) -> &mut ObjectProperties {
+        &mut self.object_props
+    }
+}
 impl Activity for Leave {}
+impl ActivityExt for Leave {
+    fn props(&self) -> &ActivityProperties {
+        &self.activity_props
+    }
+
+    fn props_mut(&mut self) -> &mut ActivityProperties {
+        &mut self.activity_props
+    }
+}

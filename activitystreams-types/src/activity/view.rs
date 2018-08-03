@@ -20,9 +20,10 @@
 use activitystreams_traits::{Activity, Object};
 
 use super::{
-    kind::ViewType, properties::{ActivityProperties, ViewProperties},
+    kind::ViewType,
+    properties::{ActivityExt, ActivityProperties, ViewProperties},
 };
-use object::properties::ObjectProperties;
+use object::properties::{ObjectExt, ObjectProperties};
 
 /// Indicates that the actor has viewed the object.
 #[derive(Clone, Debug, Default, Deserialize, Serialize, Properties)]
@@ -45,4 +46,22 @@ pub struct View {
 }
 
 impl Object for View {}
+impl ObjectExt for View {
+    fn props(&self) -> &ObjectProperties {
+        &self.object_props
+    }
+
+    fn props_mut(&mut self) -> &mut ObjectProperties {
+        &mut self.object_props
+    }
+}
 impl Activity for View {}
+impl ActivityExt for View {
+    fn props(&self) -> &ActivityProperties {
+        &self.activity_props
+    }
+
+    fn props_mut(&mut self) -> &mut ActivityProperties {
+        &mut self.activity_props
+    }
+}

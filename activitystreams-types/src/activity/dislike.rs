@@ -20,9 +20,10 @@
 use activitystreams_traits::{Activity, Object};
 
 use super::{
-    kind::DislikeType, properties::{ActivityProperties, DislikeProperties},
+    kind::DislikeType,
+    properties::{ActivityExt, ActivityProperties, DislikeProperties},
 };
-use object::properties::ObjectProperties;
+use object::properties::{ObjectExt, ObjectProperties};
 
 /// Indicates that the actor dislikes the object.
 #[derive(Clone, Debug, Default, Deserialize, Serialize, Properties)]
@@ -45,4 +46,22 @@ pub struct Dislike {
 }
 
 impl Object for Dislike {}
+impl ObjectExt for Dislike {
+    fn props(&self) -> &ObjectProperties {
+        &self.object_props
+    }
+
+    fn props_mut(&mut self) -> &mut ObjectProperties {
+        &mut self.object_props
+    }
+}
 impl Activity for Dislike {}
+impl ActivityExt for Dislike {
+    fn props(&self) -> &ActivityProperties {
+        &self.activity_props
+    }
+
+    fn props_mut(&mut self) -> &mut ActivityProperties {
+        &mut self.activity_props
+    }
+}

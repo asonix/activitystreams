@@ -59,6 +59,16 @@
 use activitystreams_traits::{Collection, CollectionPage, Link, Object};
 use serde_json;
 
+pub trait CollectionExt {
+    fn props(&self) -> &CollectionProperties;
+    fn props_mut(&mut self) -> &mut CollectionProperties;
+}
+
+pub trait CollectionPageExt {
+    fn props(&self) -> &CollectionPageProperties;
+    fn props_mut(&mut self) -> &mut CollectionPageProperties;
+}
+
 /// `Collection` objects are a specialization of the base `Object` that serve as a container for
 /// other `Objects` or `Links`.
 ///

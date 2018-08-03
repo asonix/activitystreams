@@ -20,9 +20,10 @@
 use activitystreams_traits::{Activity, Object};
 
 use super::{
-    kind::MoveType, properties::{ActivityProperties, MoveProperties},
+    kind::MoveType,
+    properties::{ActivityExt, ActivityProperties, MoveProperties},
 };
-use object::properties::ObjectProperties;
+use object::properties::{ObjectExt, ObjectProperties};
 
 /// Indicates that the actor has moved object from origin to target.
 ///
@@ -47,4 +48,22 @@ pub struct AMove {
 }
 
 impl Object for AMove {}
+impl ObjectExt for AMove {
+    fn props(&self) -> &ObjectProperties {
+        &self.object_props
+    }
+
+    fn props_mut(&mut self) -> &mut ObjectProperties {
+        &mut self.object_props
+    }
+}
 impl Activity for AMove {}
+impl ActivityExt for AMove {
+    fn props(&self) -> &ActivityProperties {
+        &self.activity_props
+    }
+
+    fn props_mut(&mut self) -> &mut ActivityProperties {
+        &mut self.activity_props
+    }
+}

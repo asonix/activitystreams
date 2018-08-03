@@ -20,5 +20,9 @@
 //! Object traits and types
 
 pub use activitystreams_traits::Object;
-pub use activitystreams_types::object::{kind, properties, Article, Audio, Document, Event, Image,
-                                        Note, Page, Place, Profile, Relationship, Tombstone, Video};
+pub use activitystreams_types::object::{
+    kind,
+    properties::{self, ObjectExt},
+    Article, Audio, Document, Event, Image, Note, Page, Place, Profile, Relationship, Tombstone,
+    Video,
+};

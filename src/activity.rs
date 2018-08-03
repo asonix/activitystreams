@@ -20,8 +20,10 @@
 //! Activity traits and types
 
 pub use activitystreams_traits::{Activity, IntransitiveActivity};
-pub use activitystreams_types::activity::{kind, properties, AMove, Accept, Add, Announce, Arrive,
-                                          Block, Create, Delete, Dislike, Flag, Follow, Ignore,
-                                          Invite, Join, Leave, Like, Listen, Offer, Question,
-                                          Read, Reject, Remove, TentativeAccept, TentativeReject,
-                                          Travel, Undo, Update, View};
+pub use activitystreams_types::activity::{
+    kind,
+    properties::{self, ActivityExt},
+    AMove, Accept, Add, Announce, Arrive, Block, Create, Delete, Dislike, Flag, Follow, Ignore,
+    Invite, Join, Leave, Like, Listen, Offer, Question, Read, Reject, Remove, TentativeAccept,
+    TentativeReject, Travel, Undo, Update, View,
+};

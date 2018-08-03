@@ -20,9 +20,10 @@
 use activitystreams_traits::{Activity, Object};
 
 use super::{
-    kind::BlockType, properties::{ActivityProperties, BlockProperties},
+    kind::BlockType,
+    properties::{ActivityExt, ActivityProperties, BlockProperties},
 };
-use object::properties::ObjectProperties;
+use object::properties::{ObjectExt, ObjectProperties};
 
 /// Indicates that the actor is blocking the object.
 ///
@@ -49,4 +50,22 @@ pub struct Block {
 }
 
 impl Object for Block {}
+impl ObjectExt for Block {
+    fn props(&self) -> &ObjectProperties {
+        &self.object_props
+    }
+
+    fn props_mut(&mut self) -> &mut ObjectProperties {
+        &mut self.object_props
+    }
+}
 impl Activity for Block {}
+impl ActivityExt for Block {
+    fn props(&self) -> &ActivityProperties {
+        &self.activity_props
+    }
+
+    fn props_mut(&mut self) -> &mut ActivityProperties {
+        &mut self.activity_props
+    }
+}

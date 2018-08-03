@@ -20,9 +20,10 @@
 use activitystreams_traits::{Activity, Object};
 
 use super::{
-    kind::FollowType, properties::{ActivityProperties, FollowProperties},
+    kind::FollowType,
+    properties::{ActivityExt, ActivityProperties, FollowProperties},
 };
-use object::properties::ObjectProperties;
+use object::properties::{ObjectExt, ObjectProperties};
 
 /// Indicates that the actor is "following" the object.
 ///
@@ -49,4 +50,22 @@ pub struct Follow {
 }
 
 impl Object for Follow {}
+impl ObjectExt for Follow {
+    fn props(&self) -> &ObjectProperties {
+        &self.object_props
+    }
+
+    fn props_mut(&mut self) -> &mut ObjectProperties {
+        &mut self.object_props
+    }
+}
 impl Activity for Follow {}
+impl ActivityExt for Follow {
+    fn props(&self) -> &ActivityProperties {
+        &self.activity_props
+    }
+
+    fn props_mut(&mut self) -> &mut ActivityProperties {
+        &mut self.activity_props
+    }
+}

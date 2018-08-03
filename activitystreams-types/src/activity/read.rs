@@ -20,9 +20,10 @@
 use activitystreams_traits::{Activity, Object};
 
 use super::{
-    kind::ReadType, properties::{ActivityProperties, ReadProperties},
+    kind::ReadType,
+    properties::{ActivityExt, ActivityProperties, ReadProperties},
 };
-use object::properties::ObjectProperties;
+use object::properties::{ObjectExt, ObjectProperties};
 
 /// Indicates that the actor has read the object.
 #[derive(Clone, Debug, Default, Deserialize, Serialize, Properties)]
@@ -45,4 +46,22 @@ pub struct Read {
 }
 
 impl Object for Read {}
+impl ObjectExt for Read {
+    fn props(&self) -> &ObjectProperties {
+        &self.object_props
+    }
+
+    fn props_mut(&mut self) -> &mut ObjectProperties {
+        &mut self.object_props
+    }
+}
 impl Activity for Read {}
+impl ActivityExt for Read {
+    fn props(&self) -> &ActivityProperties {
+        &self.activity_props
+    }
+
+    fn props_mut(&mut self) -> &mut ActivityProperties {
+        &mut self.activity_props
+    }
+}

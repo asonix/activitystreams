@@ -20,6 +20,8 @@
 //! Collection traits and types
 
 pub use activitystreams_traits::{Collection, CollectionPage};
-pub use activitystreams_types::collection::{kind, properties, OrderedCollection,
-                                            OrderedCollectionPage, UnorderedCollection,
-                                            UnorderedCollectionPage};
+pub use activitystreams_types::collection::{
+    kind,
+    properties::{self, CollectionExt, CollectionPageExt},
+    OrderedCollection, OrderedCollectionPage, UnorderedCollection, UnorderedCollectionPage,
+};

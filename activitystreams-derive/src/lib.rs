@@ -96,10 +96,8 @@ pub fn unit_string(input: TokenStream) -> TokenStream {
                 .map(|segment| {
                     let segment = segment.into_value();
                     segment.ident == Ident::new("activitystreams", segment.ident.span())
-                })
-                .unwrap_or(false)
-        })
-        .unwrap()
+                }).unwrap_or(false)
+        }).unwrap()
         .clone();
 
     let value = from_value(attr);
@@ -169,14 +167,14 @@ pub fn unit_string(input: TokenStream) -> TokenStream {
 }
 
 fn from_value(attr: Attribute) -> String {
-    let group = attr.tts
+    let group = attr
+        .tts
         .clone()
         .into_iter()
         .filter_map(|token_tree| match token_tree {
             TokenTree::Group(group) => Some(group),
             _ => None,
-        })
-        .next()
+        }).next()
         .unwrap();
 
     group
@@ -186,8 +184,7 @@ fn from_value(attr: Attribute) -> String {
         .filter_map(|token_tree| match token_tree {
             TokenTree::Term(term) => Some(term.as_str().to_owned()),
             _ => None,
-        })
-        .next()
+        }).next()
         .unwrap()
 }
 
@@ -608,14 +605,14 @@ pub fn properties_derive(input: TokenStream) -> TokenStream {
 }
 
 fn variants(attr: Attribute) -> Vec<(String, bool)> {
-    let group = attr.tts
+    let group = attr
+        .tts
         .clone()
         .into_iter()
         .filter_map(|token_tree| match token_tree {
             TokenTree::Group(group) => Some(group),
             _ => None,
-        })
-        .next()
+        }).next()
         .unwrap();
 
     let mut is_concrete = false;
@@ -636,20 +633,19 @@ fn variants(attr: Attribute) -> Vec<(String, bool)> {
                 },
             )),
             _ => None,
-        })
-        .flat_map(|i| i)
+        }).flat_map(|i| i)
         .collect()
 }
 
 fn is_functional(attr: Attribute) -> bool {
-    let group = attr.tts
+    let group = attr
+        .tts
         .clone()
         .into_iter()
         .filter_map(|token_tree| match token_tree {
             TokenTree::Group(group) => Some(group),
             _ => None,
-        })
-        .next()
+        }).next()
         .unwrap();
 
     group

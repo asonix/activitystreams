@@ -53,6 +53,11 @@ use activitystreams_traits::{Error, Link, Object, Result};
 use mime;
 use serde_json;
 
+pub trait LinkExt {
+    fn props(&self) -> &LinkProperties;
+    fn props_mut(&mut self) -> &mut LinkProperties;
+}
+
 /// Define all the properties of the Object base type as described by the Activity Streams
 /// vocabulary.
 ///

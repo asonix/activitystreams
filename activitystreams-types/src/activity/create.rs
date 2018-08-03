@@ -20,9 +20,10 @@
 use activitystreams_traits::{Activity, Object};
 
 use super::{
-    kind::CreateType, properties::{ActivityProperties, CreateProperties},
+    kind::CreateType,
+    properties::{ActivityExt, ActivityProperties, CreateProperties},
 };
-use object::properties::ObjectProperties;
+use object::properties::{ObjectExt, ObjectProperties};
 
 /// Indicates that the actor has created the object.
 #[derive(Clone, Debug, Default, Deserialize, Serialize, Properties)]
@@ -45,4 +46,22 @@ pub struct Create {
 }
 
 impl Object for Create {}
+impl ObjectExt for Create {
+    fn props(&self) -> &ObjectProperties {
+        &self.object_props
+    }
+
+    fn props_mut(&mut self) -> &mut ObjectProperties {
+        &mut self.object_props
+    }
+}
 impl Activity for Create {}
+impl ActivityExt for Create {
+    fn props(&self) -> &ActivityProperties {
+        &self.activity_props
+    }
+
+    fn props_mut(&mut self) -> &mut ActivityProperties {
+        &mut self.activity_props
+    }
+}

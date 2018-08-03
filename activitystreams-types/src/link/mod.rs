@@ -39,3 +39,12 @@ pub struct Mention {
 }
 
 impl Link for Mention {}
+impl LinkExt for Mention {
+    fn props(&self) -> &LinkProperties {
+        &self.link_props
+    }
+
+    fn props_mut(&mut self) -> &mut LinkProperties {
+        &mut self.link_props
+    }
+}

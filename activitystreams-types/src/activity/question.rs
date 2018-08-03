@@ -20,9 +20,10 @@
 use activitystreams_traits::{Activity, IntransitiveActivity, Object};
 
 use super::{
-    kind::QuestionType, properties::{ActivityProperties, QuestionProperties},
+    kind::QuestionType,
+    properties::{ActivityExt, ActivityProperties, QuestionProperties},
 };
-use object::properties::ObjectProperties;
+use object::properties::{ObjectExt, ObjectProperties};
 
 /// Represents a question being asked.
 ///
@@ -52,5 +53,23 @@ pub struct Question {
 }
 
 impl Object for Question {}
+impl ObjectExt for Question {
+    fn props(&self) -> &ObjectProperties {
+        &self.object_props
+    }
+
+    fn props_mut(&mut self) -> &mut ObjectProperties {
+        &mut self.object_props
+    }
+}
 impl Activity for Question {}
+impl ActivityExt for Question {
+    fn props(&self) -> &ActivityProperties {
+        &self.activity_props
+    }
+
+    fn props_mut(&mut self) -> &mut ActivityProperties {
+        &mut self.activity_props
+    }
+}
 impl IntransitiveActivity for Question {}

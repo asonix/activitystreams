@@ -21,7 +21,7 @@
 
 use activitystreams_traits::{Collection, CollectionPage, Object};
 
-use object::properties::ObjectProperties;
+use object::properties::{ObjectExt, ObjectProperties};
 
 pub mod kind;
 pub mod properties;
@@ -45,7 +45,25 @@ pub struct UnorderedCollection {
 }
 
 impl Object for UnorderedCollection {}
+impl ObjectExt for UnorderedCollection {
+    fn props(&self) -> &ObjectProperties {
+        &self.object_props
+    }
+
+    fn props_mut(&mut self) -> &mut ObjectProperties {
+        &mut self.object_props
+    }
+}
 impl Collection for UnorderedCollection {}
+impl CollectionExt for UnorderedCollection {
+    fn props(&self) -> &CollectionProperties {
+        &self.collection_props
+    }
+
+    fn props_mut(&mut self) -> &mut CollectionProperties {
+        &mut self.collection_props
+    }
+}
 
 /// A subtype of `Collection` in which members of the logical collection are assumed to always be
 /// strictly ordered.
@@ -65,7 +83,25 @@ pub struct OrderedCollection {
 }
 
 impl Object for OrderedCollection {}
+impl ObjectExt for OrderedCollection {
+    fn props(&self) -> &ObjectProperties {
+        &self.object_props
+    }
+
+    fn props_mut(&mut self) -> &mut ObjectProperties {
+        &mut self.object_props
+    }
+}
 impl Collection for OrderedCollection {}
+impl CollectionExt for OrderedCollection {
+    fn props(&self) -> &CollectionProperties {
+        &self.collection_props
+    }
+
+    fn props_mut(&mut self) -> &mut CollectionProperties {
+        &mut self.collection_props
+    }
+}
 
 /// Used to represent distinct subsets of items from a `Collection`.
 #[derive(Clone, Debug, Default, Deserialize, Serialize, Properties)]
@@ -88,8 +124,35 @@ pub struct UnorderedCollectionPage {
 }
 
 impl Object for UnorderedCollectionPage {}
+impl ObjectExt for UnorderedCollectionPage {
+    fn props(&self) -> &ObjectProperties {
+        &self.object_props
+    }
+
+    fn props_mut(&mut self) -> &mut ObjectProperties {
+        &mut self.object_props
+    }
+}
 impl Collection for UnorderedCollectionPage {}
+impl CollectionExt for UnorderedCollectionPage {
+    fn props(&self) -> &CollectionProperties {
+        &self.collection_props
+    }
+
+    fn props_mut(&mut self) -> &mut CollectionProperties {
+        &mut self.collection_props
+    }
+}
 impl CollectionPage for UnorderedCollectionPage {}
+impl CollectionPageExt for UnorderedCollectionPage {
+    fn props(&self) -> &CollectionPageProperties {
+        &self.collection_page_props
+    }
+
+    fn props_mut(&mut self) -> &mut CollectionPageProperties {
+        &mut self.collection_page_props
+    }
+}
 
 /// Used to represent ordered subsets of items from an `OrderedCollection`.
 #[derive(Clone, Debug, Default, Deserialize, Serialize, Properties)]
@@ -116,5 +179,32 @@ pub struct OrderedCollectionPage {
 }
 
 impl Object for OrderedCollectionPage {}
+impl ObjectExt for OrderedCollectionPage {
+    fn props(&self) -> &ObjectProperties {
+        &self.object_props
+    }
+
+    fn props_mut(&mut self) -> &mut ObjectProperties {
+        &mut self.object_props
+    }
+}
 impl Collection for OrderedCollectionPage {}
+impl CollectionExt for OrderedCollectionPage {
+    fn props(&self) -> &CollectionProperties {
+        &self.collection_props
+    }
+
+    fn props_mut(&mut self) -> &mut CollectionProperties {
+        &mut self.collection_props
+    }
+}
 impl CollectionPage for OrderedCollectionPage {}
+impl CollectionPageExt for OrderedCollectionPage {
+    fn props(&self) -> &CollectionPageProperties {
+        &self.collection_page_props
+    }
+
+    fn props_mut(&mut self) -> &mut CollectionPageProperties {
+        &mut self.collection_page_props
+    }
+}

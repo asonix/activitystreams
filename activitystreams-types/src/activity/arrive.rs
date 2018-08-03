@@ -20,9 +20,10 @@
 use activitystreams_traits::{Activity, IntransitiveActivity, Object};
 
 use super::{
-    kind::ArriveType, properties::{ActivityProperties, ArriveProperties},
+    kind::ArriveType,
+    properties::{ActivityExt, ActivityProperties, ArriveProperties},
 };
-use object::properties::ObjectProperties;
+use object::properties::{ObjectExt, ObjectProperties};
 
 /// An IntransitiveActivity that indicates that the actor has arrived at the location.
 ///
@@ -48,5 +49,23 @@ pub struct Arrive {
 }
 
 impl Object for Arrive {}
+impl ObjectExt for Arrive {
+    fn props(&self) -> &ObjectProperties {
+        &self.object_props
+    }
+
+    fn props_mut(&mut self) -> &mut ObjectProperties {
+        &mut self.object_props
+    }
+}
 impl Activity for Arrive {}
 impl IntransitiveActivity for Arrive {}
+impl ActivityExt for Arrive {
+    fn props(&self) -> &ActivityProperties {
+        &self.activity_props
+    }
+
+    fn props_mut(&mut self) -> &mut ActivityProperties {
+        &mut self.activity_props
+    }
+}

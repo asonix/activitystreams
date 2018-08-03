@@ -39,6 +39,15 @@ pub struct Article {
 }
 
 impl Object for Article {}
+impl ObjectExt for Article {
+    fn props(&self) -> &ObjectProperties {
+        &self.object_props
+    }
+
+    fn props_mut(&mut self) -> &mut ObjectProperties {
+        &mut self.object_props
+    }
+}
 
 /// Represents an audio document of any kind.
 #[derive(Clone, Debug, Default, Deserialize, Serialize)]
@@ -53,6 +62,15 @@ pub struct Audio {
 }
 
 impl Object for Audio {}
+impl ObjectExt for Audio {
+    fn props(&self) -> &ObjectProperties {
+        &self.object_props
+    }
+
+    fn props_mut(&mut self) -> &mut ObjectProperties {
+        &mut self.object_props
+    }
+}
 
 /// Represents a document of any kind.
 #[derive(Clone, Debug, Default, Deserialize, Serialize)]
@@ -67,6 +85,15 @@ pub struct Document {
 }
 
 impl Object for Document {}
+impl ObjectExt for Document {
+    fn props(&self) -> &ObjectProperties {
+        &self.object_props
+    }
+
+    fn props_mut(&mut self) -> &mut ObjectProperties {
+        &mut self.object_props
+    }
+}
 
 /// Represents any kind of event.
 #[derive(Clone, Debug, Default, Deserialize, Serialize)]
@@ -81,6 +108,15 @@ pub struct Event {
 }
 
 impl Object for Event {}
+impl ObjectExt for Event {
+    fn props(&self) -> &ObjectProperties {
+        &self.object_props
+    }
+
+    fn props_mut(&mut self) -> &mut ObjectProperties {
+        &mut self.object_props
+    }
+}
 
 /// An image document of any kind
 #[derive(Clone, Debug, Default, Deserialize, Serialize)]
@@ -95,6 +131,15 @@ pub struct Image {
 }
 
 impl Object for Image {}
+impl ObjectExt for Image {
+    fn props(&self) -> &ObjectProperties {
+        &self.object_props
+    }
+
+    fn props_mut(&mut self) -> &mut ObjectProperties {
+        &mut self.object_props
+    }
+}
 
 /// Represents a short written work typically less than a single paragraph in length.
 #[derive(Clone, Debug, Default, Deserialize, Serialize)]
@@ -109,6 +154,15 @@ pub struct Note {
 }
 
 impl Object for Note {}
+impl ObjectExt for Note {
+    fn props(&self) -> &ObjectProperties {
+        &self.object_props
+    }
+
+    fn props_mut(&mut self) -> &mut ObjectProperties {
+        &mut self.object_props
+    }
+}
 
 /// Represents a Web Page.
 #[derive(Clone, Debug, Default, Deserialize, Serialize)]
@@ -123,6 +177,15 @@ pub struct Page {
 }
 
 impl Object for Page {}
+impl ObjectExt for Page {
+    fn props(&self) -> &ObjectProperties {
+        &self.object_props
+    }
+
+    fn props_mut(&mut self) -> &mut ObjectProperties {
+        &mut self.object_props
+    }
+}
 
 /// Represents a logical or physical location.
 ///
@@ -158,6 +221,15 @@ pub struct Place {
 }
 
 impl Object for Place {}
+impl ObjectExt for Place {
+    fn props(&self) -> &ObjectProperties {
+        &self.object_props
+    }
+
+    fn props_mut(&mut self) -> &mut ObjectProperties {
+        &mut self.object_props
+    }
+}
 
 /// A Profile is a content object that describes another `Object`, typically used to describe
 /// `Actor` Type objects.
@@ -179,6 +251,15 @@ pub struct Profile {
 }
 
 impl Object for Profile {}
+impl ObjectExt for Profile {
+    fn props(&self) -> &ObjectProperties {
+        &self.object_props
+    }
+
+    fn props_mut(&mut self) -> &mut ObjectProperties {
+        &mut self.object_props
+    }
+}
 
 /// Describes a relationship between two individuals.
 ///
@@ -210,6 +291,15 @@ pub struct Relationship {
 }
 
 impl Object for Relationship {}
+impl ObjectExt for Relationship {
+    fn props(&self) -> &ObjectProperties {
+        &self.object_props
+    }
+
+    fn props_mut(&mut self) -> &mut ObjectProperties {
+        &mut self.object_props
+    }
+}
 
 /// A Tombstone represents a content object that has been deleted.
 ///
@@ -231,6 +321,15 @@ pub struct Tombstone {
 }
 
 impl Object for Tombstone {}
+impl ObjectExt for Tombstone {
+    fn props(&self) -> &ObjectProperties {
+        &self.object_props
+    }
+
+    fn props_mut(&mut self) -> &mut ObjectProperties {
+        &mut self.object_props
+    }
+}
 
 /// Represents a video document of any kind.
 #[derive(Clone, Debug, Default, Deserialize, Serialize)]
@@ -245,3 +344,12 @@ pub struct Video {
 }
 
 impl Object for Video {}
+impl ObjectExt for Video {
+    fn props(&self) -> &ObjectProperties {
+        &self.object_props
+    }
+
+    fn props_mut(&mut self) -> &mut ObjectProperties {
+        &mut self.object_props
+    }
+}

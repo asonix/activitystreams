@@ -21,7 +21,7 @@
 
 use activitystreams_traits::{Actor, Object};
 
-use object::properties::ObjectProperties;
+use object::properties::{ObjectExt, ObjectProperties};
 
 pub mod kind;
 use self::kind::*;
@@ -39,6 +39,15 @@ pub struct Application {
 }
 
 impl Object for Application {}
+impl ObjectExt for Application {
+    fn props(&self) -> &ObjectProperties {
+        &self.object_props
+    }
+
+    fn props_mut(&mut self) -> &mut ObjectProperties {
+        &mut self.object_props
+    }
+}
 impl Actor for Application {}
 
 /// Represents a formal or informal collective of Actors.
@@ -54,6 +63,15 @@ pub struct Group {
 }
 
 impl Object for Group {}
+impl ObjectExt for Group {
+    fn props(&self) -> &ObjectProperties {
+        &self.object_props
+    }
+
+    fn props_mut(&mut self) -> &mut ObjectProperties {
+        &mut self.object_props
+    }
+}
 impl Actor for Group {}
 
 /// Represents an organization.
@@ -69,6 +87,15 @@ pub struct Organization {
 }
 
 impl Object for Organization {}
+impl ObjectExt for Organization {
+    fn props(&self) -> &ObjectProperties {
+        &self.object_props
+    }
+
+    fn props_mut(&mut self) -> &mut ObjectProperties {
+        &mut self.object_props
+    }
+}
 impl Actor for Organization {}
 
 /// Represents an individual person.
@@ -84,6 +111,15 @@ pub struct Person {
 }
 
 impl Object for Person {}
+impl ObjectExt for Person {
+    fn props(&self) -> &ObjectProperties {
+        &self.object_props
+    }
+
+    fn props_mut(&mut self) -> &mut ObjectProperties {
+        &mut self.object_props
+    }
+}
 impl Actor for Person {}
 
 /// Represents a service of any kind.
@@ -99,4 +135,13 @@ pub struct Service {
 }
 
 impl Object for Service {}
+impl ObjectExt for Service {
+    fn props(&self) -> &ObjectProperties {
+        &self.object_props
+    }
+
+    fn props_mut(&mut self) -> &mut ObjectProperties {
+        &mut self.object_props
+    }
+}
 impl Actor for Service {}

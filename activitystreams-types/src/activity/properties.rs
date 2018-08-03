@@ -56,8 +56,13 @@
 //! # fn main() {}
 //! ```
 
-use activitystreams_traits::{Link, Object};
+use activitystreams_traits::{Activity, Link, Object};
 use serde_json;
+
+pub trait ActivityExt: Activity {
+    fn props(&self) -> &ActivityProperties;
+    fn props_mut(&mut self) -> &mut ActivityProperties;
+}
 
 /// Activity objects are specializations of the base Object type that provide information about
 /// actions that have either already occurred, are in the process of occurring, or may occur in the

@@ -20,9 +20,10 @@
 use activitystreams_traits::{Activity, Object};
 
 use super::{
-    kind::UndoType, properties::{ActivityProperties, UndoProperties},
+    kind::UndoType,
+    properties::{ActivityExt, ActivityProperties, UndoProperties},
 };
-use object::properties::ObjectProperties;
+use object::properties::{ObjectExt, ObjectProperties};
 
 /// Indicates that the actor is undoing the object.
 ///
@@ -51,4 +52,22 @@ pub struct Undo {
 }
 
 impl Object for Undo {}
+impl ObjectExt for Undo {
+    fn props(&self) -> &ObjectProperties {
+        &self.object_props
+    }
+
+    fn props_mut(&mut self) -> &mut ObjectProperties {
+        &mut self.object_props
+    }
+}
 impl Activity for Undo {}
+impl ActivityExt for Undo {
+    fn props(&self) -> &ActivityProperties {
+        &self.activity_props
+    }
+
+    fn props_mut(&mut self) -> &mut ActivityProperties {
+        &mut self.activity_props
+    }
+}

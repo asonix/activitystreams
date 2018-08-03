@@ -20,9 +20,10 @@
 use activitystreams_traits::{Activity, Object};
 
 use super::{
-    kind::IgnoreType, properties::{ActivityProperties, IgnoreProperties},
+    kind::IgnoreType,
+    properties::{ActivityExt, ActivityProperties, IgnoreProperties},
 };
-use object::properties::ObjectProperties;
+use object::properties::{ObjectExt, ObjectProperties};
 
 /// Indicates that the actor is ignoring the object.
 ///
@@ -47,4 +48,22 @@ pub struct Ignore {
 }
 
 impl Object for Ignore {}
+impl ObjectExt for Ignore {
+    fn props(&self) -> &ObjectProperties {
+        &self.object_props
+    }
+
+    fn props_mut(&mut self) -> &mut ObjectProperties {
+        &mut self.object_props
+    }
+}
 impl Activity for Ignore {}
+impl ActivityExt for Ignore {
+    fn props(&self) -> &ActivityProperties {
+        &self.activity_props
+    }
+
+    fn props_mut(&mut self) -> &mut ActivityProperties {
+        &mut self.activity_props
+    }
+}

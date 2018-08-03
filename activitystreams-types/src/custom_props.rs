@@ -21,8 +21,9 @@
 
 use serde::{de::DeserializeOwned, ser::Serialize};
 
-use activitystreams_traits::{Activity, Actor, Collection, CollectionPage, IntransitiveActivity,
-                             Link, Object};
+use activitystreams_traits::{
+    Activity, Actor, Collection, CollectionPage, IntransitiveActivity, Link, Object,
+};
 
 /// A custom type extending Link
 ///
@@ -127,23 +128,19 @@ impl<C, O> Collection for CustomObject<C, O>
 where
     C: DeserializeOwned + Serialize,
     O: Collection,
-{
-}
+{}
 impl<C, O> CollectionPage for CustomObject<C, O>
 where
     C: DeserializeOwned + Serialize,
     O: CollectionPage,
-{
-}
+{}
 impl<C, O> Activity for CustomObject<C, O>
 where
     C: DeserializeOwned + Serialize,
     O: Activity,
-{
-}
+{}
 impl<C, O> IntransitiveActivity for CustomObject<C, O>
 where
     C: DeserializeOwned + Serialize,
     O: IntransitiveActivity,
-{
-}
+{}

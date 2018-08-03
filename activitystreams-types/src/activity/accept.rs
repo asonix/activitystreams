@@ -20,9 +20,10 @@
 use activitystreams_traits::{Activity, Object};
 
 use super::{
-    kind::AcceptType, properties::{AcceptProperties, ActivityProperties},
+    kind::AcceptType,
+    properties::{AcceptProperties, ActivityExt, ActivityProperties},
 };
-use object::properties::ObjectProperties;
+use object::properties::{ObjectExt, ObjectProperties};
 
 /// Indicates that the actor accepts the object.
 ///
@@ -48,4 +49,22 @@ pub struct Accept {
 }
 
 impl Object for Accept {}
+impl ObjectExt for Accept {
+    fn props(&self) -> &ObjectProperties {
+        &self.object_props
+    }
+
+    fn props_mut(&mut self) -> &mut ObjectProperties {
+        &mut self.object_props
+    }
+}
 impl Activity for Accept {}
+impl ActivityExt for Accept {
+    fn props(&self) -> &ActivityProperties {
+        &self.activity_props
+    }
+
+    fn props_mut(&mut self) -> &mut ActivityProperties {
+        &mut self.activity_props
+    }
+}

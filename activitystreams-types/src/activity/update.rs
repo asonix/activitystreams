@@ -20,9 +20,10 @@
 use activitystreams_traits::{Activity, Object};
 
 use super::{
-    kind::UpdateType, properties::{ActivityProperties, UpdateProperties},
+    kind::UpdateType,
+    properties::{ActivityExt, ActivityProperties, UpdateProperties},
 };
-use object::properties::ObjectProperties;
+use object::properties::{ObjectExt, ObjectProperties};
 
 /// Indicates that the actor has updated the object.
 ///
@@ -50,4 +51,22 @@ pub struct Update {
 }
 
 impl Object for Update {}
+impl ObjectExt for Update {
+    fn props(&self) -> &ObjectProperties {
+        &self.object_props
+    }
+
+    fn props_mut(&mut self) -> &mut ObjectProperties {
+        &mut self.object_props
+    }
+}
 impl Activity for Update {}
+impl ActivityExt for Update {
+    fn props(&self) -> &ActivityProperties {
+        &self.activity_props
+    }
+
+    fn props_mut(&mut self) -> &mut ActivityProperties {
+        &mut self.activity_props
+    }
+}

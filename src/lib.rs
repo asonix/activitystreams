@@ -148,11 +148,11 @@ mod error;
 pub mod link;
 pub mod object;
 
-pub use self::activity::{Activity, IntransitiveActivity};
+pub use self::activity::{Activity, ActivityExt, IntransitiveActivity};
 pub use self::actor::Actor;
-pub use self::collection::{Collection, CollectionPage};
+pub use self::collection::{Collection, CollectionExt, CollectionPage, CollectionPageExt};
 pub use self::error::{Error, Result};
-pub use self::link::Link;
-pub use self::object::Object;
+pub use self::link::{Link, LinkExt};
+pub use self::object::{Object, ObjectExt};
 pub use activitystreams_traits::properties;
 pub use activitystreams_types::context;

@@ -20,9 +20,10 @@
 use activitystreams_traits::{Activity, Object};
 
 use super::{
-    kind::JoinType, properties::{ActivityProperties, JoinProperties},
+    kind::JoinType,
+    properties::{ActivityExt, ActivityProperties, JoinProperties},
 };
-use object::properties::ObjectProperties;
+use object::properties::{ObjectExt, ObjectProperties};
 
 /// Indicates that the actor has joined the object.
 ///
@@ -47,4 +48,22 @@ pub struct Join {
 }
 
 impl Object for Join {}
+impl ObjectExt for Join {
+    fn props(&self) -> &ObjectProperties {
+        &self.object_props
+    }
+
+    fn props_mut(&mut self) -> &mut ObjectProperties {
+        &mut self.object_props
+    }
+}
 impl Activity for Join {}
+impl ActivityExt for Join {
+    fn props(&self) -> &ActivityProperties {
+        &self.activity_props
+    }
+
+    fn props_mut(&mut self) -> &mut ActivityProperties {
+        &mut self.activity_props
+    }
+}

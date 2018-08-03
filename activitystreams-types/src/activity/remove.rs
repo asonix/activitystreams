@@ -20,9 +20,10 @@
 use activitystreams_traits::{Activity, Object};
 
 use super::{
-    kind::RemoveType, properties::{ActivityProperties, RemoveProperties},
+    kind::RemoveType,
+    properties::{ActivityExt, ActivityProperties, RemoveProperties},
 };
-use object::properties::ObjectProperties;
+use object::properties::{ObjectExt, ObjectProperties};
 
 /// Indicates that the actor is removing the object.
 ///
@@ -47,4 +48,22 @@ pub struct Remove {
 }
 
 impl Object for Remove {}
+impl ObjectExt for Remove {
+    fn props(&self) -> &ObjectProperties {
+        &self.object_props
+    }
+
+    fn props_mut(&mut self) -> &mut ObjectProperties {
+        &mut self.object_props
+    }
+}
 impl Activity for Remove {}
+impl ActivityExt for Remove {
+    fn props(&self) -> &ActivityProperties {
+        &self.activity_props
+    }
+
+    fn props_mut(&mut self) -> &mut ActivityProperties {
+        &mut self.activity_props
+    }
+}

@@ -20,9 +20,10 @@
 use activitystreams_traits::{Activity, Object};
 
 use super::{
-    kind::AddType, properties::{ActivityProperties, AddProperties},
+    kind::AddType,
+    properties::{ActivityExt, ActivityProperties, AddProperties},
 };
-use object::properties::ObjectProperties;
+use object::properties::{ObjectExt, ObjectProperties};
 
 /// Indicates that the actor has added the object to the target.
 ///
@@ -49,4 +50,22 @@ pub struct Add {
 }
 
 impl Object for Add {}
+impl ObjectExt for Add {
+    fn props(&self) -> &ObjectProperties {
+        &self.object_props
+    }
+
+    fn props_mut(&mut self) -> &mut ObjectProperties {
+        &mut self.object_props
+    }
+}
 impl Activity for Add {}
+impl ActivityExt for Add {
+    fn props(&self) -> &ActivityProperties {
+        &self.activity_props
+    }
+
+    fn props_mut(&mut self) -> &mut ActivityProperties {
+        &mut self.activity_props
+    }
+}
