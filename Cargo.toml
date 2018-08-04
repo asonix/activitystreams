@@ -1,10 +1,10 @@
 [package]
 name = "activitystreams"
 description = "Activity Streams in Rust"
-version = "0.2.1"
+version = "0.2.2"
 license = "GPL-3.0"
 authors = ["asonix <asonix@asonix.dog>"]
-repository = "https://git.asonix.cloud/activitystreams.git"
+repository = "https://git.asonix.cloud/asonix/activitystreams.git"
 readme = "README.md"
 keywords = ["activitystreams", "activitypub"]
 
