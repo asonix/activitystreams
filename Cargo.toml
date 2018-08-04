@@ -10,7 +10,7 @@ keywords = ["activitystreams", "activitypub"]
 
 [dependencies]
 activitystreams-traits = { version = "0.1", path = "activitystreams-traits" }
-activitystreams-types = { version = "0.2", path = "activitystreams-types" }
+activitystreams-types = { version = "0.2.1", path = "activitystreams-types" }
 
 [dev-dependencies]
 failure = "0.1"
