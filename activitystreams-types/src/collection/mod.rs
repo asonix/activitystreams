@@ -28,11 +28,17 @@ pub mod properties;
 use self::kind::*;
 use self::properties::*;
 
+/// The Collection Extension Trait
+///
+/// This trait provides generic access to a collection's properties
 pub trait CollectionExt: Collection {
     fn props(&self) -> &CollectionProperties;
     fn props_mut(&mut self) -> &mut CollectionProperties;
 }
 
+/// The Collection Page Extension Trait
+///
+/// This trait provides generic access to a collection page's properties
 pub trait CollectionPageExt: CollectionPage {
     fn props(&self) -> &CollectionPageProperties;
     fn props_mut(&mut self) -> &mut CollectionPageProperties;

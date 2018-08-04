@@ -81,6 +81,9 @@ use activitystreams_traits::Activity;
 
 use self::properties::ActivityProperties;
 
+/// The Activity Extension Trait
+///
+/// This trait provides generic access to an activity's properties
 pub trait ActivityExt: Activity {
     fn props(&self) -> &ActivityProperties;
     fn props_mut(&mut self) -> &mut ActivityProperties;

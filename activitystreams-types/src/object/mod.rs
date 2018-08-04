@@ -26,6 +26,9 @@ pub mod properties;
 use self::kind::*;
 use self::properties::*;
 
+/// The Object Extension Trait
+///
+/// This trait provides generic access to an object's properties
 pub trait ObjectExt: Object {
     fn props(&self) -> &ObjectProperties;
     fn props_mut(&mut self) -> &mut ObjectProperties;
