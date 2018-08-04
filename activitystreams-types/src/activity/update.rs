@@ -21,9 +21,10 @@ use activitystreams_traits::{Activity, Object};
 
 use super::{
     kind::UpdateType,
-    properties::{ActivityExt, ActivityProperties, UpdateProperties},
+    properties::{ActivityProperties, UpdateProperties},
+    ActivityExt,
 };
-use object::properties::{ObjectExt, ObjectProperties};
+use object::{properties::ObjectProperties, ObjectExt};
 
 /// Indicates that the actor has updated the object.
 ///

@@ -21,9 +21,10 @@ use activitystreams_traits::{Activity, Object};
 
 use super::{
     kind::ReadType,
-    properties::{ActivityExt, ActivityProperties, ReadProperties},
+    properties::{ActivityProperties, ReadProperties},
+    ActivityExt,
 };
-use object::properties::{ObjectExt, ObjectProperties};
+use object::{properties::ObjectProperties, ObjectExt};
 
 /// Indicates that the actor has read the object.
 #[derive(Clone, Debug, Default, Deserialize, Serialize, Properties)]

@@ -21,9 +21,10 @@ use activitystreams_traits::{Activity, Object};
 
 use super::{
     kind::MoveType,
-    properties::{ActivityExt, ActivityProperties, MoveProperties},
+    properties::{ActivityProperties, MoveProperties},
+    ActivityExt,
 };
-use object::properties::{ObjectExt, ObjectProperties};
+use object::{properties::ObjectProperties, ObjectExt};
 
 /// Indicates that the actor has moved object from origin to target.
 ///

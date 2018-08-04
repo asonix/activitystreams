@@ -21,9 +21,10 @@ use activitystreams_traits::{Activity, Object};
 
 use super::{
     kind::ListenType,
-    properties::{ActivityExt, ActivityProperties, ListenProperties},
+    properties::{ActivityProperties, ListenProperties},
+    ActivityExt,
 };
-use object::properties::{ObjectExt, ObjectProperties};
+use object::{properties::ObjectProperties, ObjectExt};
 
 /// Indicates that the actor has listened to the object.
 #[derive(Clone, Debug, Default, Deserialize, Serialize, Properties)]

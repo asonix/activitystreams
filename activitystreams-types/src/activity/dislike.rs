@@ -21,9 +21,10 @@ use activitystreams_traits::{Activity, Object};
 
 use super::{
     kind::DislikeType,
-    properties::{ActivityExt, ActivityProperties, DislikeProperties},
+    properties::{ActivityProperties, DislikeProperties},
+    ActivityExt,
 };
-use object::properties::{ObjectExt, ObjectProperties};
+use object::{properties::ObjectProperties, ObjectExt};
 
 /// Indicates that the actor dislikes the object.
 #[derive(Clone, Debug, Default, Deserialize, Serialize, Properties)]

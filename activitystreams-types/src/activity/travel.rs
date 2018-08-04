@@ -21,9 +21,10 @@ use activitystreams_traits::{Activity, IntransitiveActivity, Object};
 
 use super::{
     kind::TravelType,
-    properties::{ActivityExt, ActivityProperties, TravelProperties},
+    properties::{ActivityProperties, TravelProperties},
+    ActivityExt,
 };
-use object::properties::{ObjectExt, ObjectProperties};
+use object::{properties::ObjectProperties, ObjectExt};
 
 /// Indicates that the actor is traveling to target from origin.
 ///

@@ -21,12 +21,22 @@
 
 use activitystreams_traits::{Collection, CollectionPage, Object};
 
-use object::properties::{ObjectExt, ObjectProperties};
+use object::{properties::ObjectProperties, ObjectExt};
 
 pub mod kind;
 pub mod properties;
 use self::kind::*;
 use self::properties::*;
+
+pub trait CollectionExt: Collection {
+    fn props(&self) -> &CollectionProperties;
+    fn props_mut(&mut self) -> &mut CollectionProperties;
+}
+
+pub trait CollectionPageExt: CollectionPage {
+    fn props(&self) -> &CollectionPageProperties;
+    fn props_mut(&mut self) -> &mut CollectionPageProperties;
+}
 
 /// The default `Collection` type.
 #[derive(Clone, Debug, Default, Deserialize, Serialize, Properties)]

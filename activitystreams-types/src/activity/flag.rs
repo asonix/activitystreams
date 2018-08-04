@@ -21,9 +21,10 @@ use activitystreams_traits::{Activity, Object};
 
 use super::{
     kind::FlagType,
-    properties::{ActivityExt, ActivityProperties, FlagProperties},
+    properties::{ActivityProperties, FlagProperties},
+    ActivityExt,
 };
-use object::properties::{ObjectExt, ObjectProperties};
+use object::{properties::ObjectProperties, ObjectExt};
 
 /// Indicates that the actor is "flagging" the object.
 ///

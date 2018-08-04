@@ -21,9 +21,10 @@ use activitystreams_traits::{Activity, Object};
 
 use super::{
     kind::AcceptType,
-    properties::{AcceptProperties, ActivityExt, ActivityProperties},
+    properties::{AcceptProperties, ActivityProperties},
+    ActivityExt,
 };
-use object::properties::{ObjectExt, ObjectProperties};
+use object::{properties::ObjectProperties, ObjectExt};
 
 /// Indicates that the actor accepts the object.
 ///

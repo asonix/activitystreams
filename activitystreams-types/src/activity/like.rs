@@ -21,9 +21,10 @@ use activitystreams_traits::{Activity, Object};
 
 use super::{
     kind::LikeType,
-    properties::{ActivityExt, ActivityProperties, LikeProperties},
+    properties::{ActivityProperties, LikeProperties},
+    ActivityExt,
 };
-use object::properties::{ObjectExt, ObjectProperties};
+use object::{properties::ObjectProperties, ObjectExt};
 
 /// Indicates that the actor likes, recommends or endorses the object.
 ///

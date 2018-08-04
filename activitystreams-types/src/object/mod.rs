@@ -26,6 +26,11 @@ pub mod properties;
 use self::kind::*;
 use self::properties::*;
 
+pub trait ObjectExt: Object {
+    fn props(&self) -> &ObjectProperties;
+    fn props_mut(&mut self) -> &mut ObjectProperties;
+}
+
 /// Represents any kind of multi-paragraph written work.
 #[derive(Clone, Debug, Default, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]

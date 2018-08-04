@@ -21,9 +21,10 @@ use activitystreams_traits::{Activity, Object};
 
 use super::{
     kind::TentativeRejectType,
-    properties::{ActivityExt, ActivityProperties, TentativeRejectProperties},
+    properties::{ActivityProperties, TentativeRejectProperties},
+    ActivityExt,
 };
-use object::properties::{ObjectExt, ObjectProperties};
+use object::{properties::ObjectProperties, ObjectExt};
 
 /// A specialization of Reject in which the rejection is considered tentative.
 #[derive(Clone, Debug, Default, Deserialize, Serialize, Properties)]

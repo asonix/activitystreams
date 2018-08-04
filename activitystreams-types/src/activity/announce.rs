@@ -21,9 +21,10 @@ use activitystreams_traits::{Activity, Object};
 
 use super::{
     kind::AnnounceType,
-    properties::{ActivityExt, ActivityProperties, AnnounceProperties},
+    properties::{ActivityProperties, AnnounceProperties},
+    ActivityExt,
 };
-use object::properties::{ObjectExt, ObjectProperties};
+use object::{properties::ObjectProperties, ObjectExt};
 
 /// Indicates that the actor is calling the target's attention the object.
 ///

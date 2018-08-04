@@ -21,9 +21,10 @@ use activitystreams_traits::{Activity, Object};
 
 use super::{
     kind::JoinType,
-    properties::{ActivityExt, ActivityProperties, JoinProperties},
+    properties::{ActivityProperties, JoinProperties},
+    ActivityExt,
 };
-use object::properties::{ObjectExt, ObjectProperties};
+use object::{properties::ObjectProperties, ObjectExt};
 
 /// Indicates that the actor has joined the object.
 ///

@@ -21,8 +21,6 @@
 
 pub use activitystreams_traits::Object;
 pub use activitystreams_types::object::{
-    kind,
-    properties::{self, ObjectExt},
-    Article, Audio, Document, Event, Image, Note, Page, Place, Profile, Relationship, Tombstone,
-    Video,
+    kind, properties, Article, Audio, Document, Event, Image, Note, ObjectExt, Page, Place,
+    Profile, Relationship, Tombstone, Video,
 };

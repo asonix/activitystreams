@@ -21,9 +21,10 @@ use activitystreams_traits::{Activity, Object};
 
 use super::{
     kind::InviteType,
-    properties::{ActivityExt, ActivityProperties, InviteProperties},
+    properties::{ActivityProperties, InviteProperties},
+    ActivityExt,
 };
-use object::properties::{ObjectExt, ObjectProperties};
+use object::{properties::ObjectProperties, ObjectExt};
 
 /// A specialization of Offer in which the actor is extending an invitation for the object to the
 /// target.

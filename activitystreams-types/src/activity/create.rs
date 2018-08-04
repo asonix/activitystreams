@@ -21,9 +21,10 @@ use activitystreams_traits::{Activity, Object};
 
 use super::{
     kind::CreateType,
-    properties::{ActivityExt, ActivityProperties, CreateProperties},
+    properties::{ActivityProperties, CreateProperties},
+    ActivityExt,
 };
-use object::properties::{ObjectExt, ObjectProperties};
+use object::{properties::ObjectProperties, ObjectExt};
 
 /// Indicates that the actor has created the object.
 #[derive(Clone, Debug, Default, Deserialize, Serialize, Properties)]

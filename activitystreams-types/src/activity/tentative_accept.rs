@@ -21,9 +21,10 @@ use activitystreams_traits::{Activity, Object};
 
 use super::{
     kind::TentativeAcceptType,
-    properties::{ActivityExt, ActivityProperties, TentativeAcceptProperties},
+    properties::{ActivityProperties, TentativeAcceptProperties},
+    ActivityExt,
 };
-use object::properties::{ObjectExt, ObjectProperties};
+use object::{properties::ObjectProperties, ObjectExt};
 
 /// A specialization of Accept indicating that the acceptance is tentative.
 #[derive(Clone, Debug, Default, Deserialize, Serialize, Properties)]

@@ -21,9 +21,10 @@ use activitystreams_traits::{Activity, Object};
 
 use super::{
     kind::FollowType,
-    properties::{ActivityExt, ActivityProperties, FollowProperties},
+    properties::{ActivityProperties, FollowProperties},
+    ActivityExt,
 };
-use object::properties::{ObjectExt, ObjectProperties};
+use object::{properties::ObjectProperties, ObjectExt};
 
 /// Indicates that the actor is "following" the object.
 ///

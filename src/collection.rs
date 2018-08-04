@@ -21,7 +21,6 @@
 
 pub use activitystreams_traits::{Collection, CollectionPage};
 pub use activitystreams_types::collection::{
-    kind,
-    properties::{self, CollectionExt, CollectionPageExt},
-    OrderedCollection, OrderedCollectionPage, UnorderedCollection, UnorderedCollectionPage,
+    kind, properties, CollectionExt, CollectionPageExt, OrderedCollection, OrderedCollectionPage,
+    UnorderedCollection, UnorderedCollectionPage,
 };

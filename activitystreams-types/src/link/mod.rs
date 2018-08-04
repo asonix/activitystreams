@@ -26,6 +26,11 @@ pub mod properties;
 use self::kind::*;
 use self::properties::*;
 
+pub trait LinkExt: Link {
+    fn props(&self) -> &LinkProperties;
+    fn props_mut(&mut self) -> &mut LinkProperties;
+}
+
 /// A specialized Link that represents an @mention.
 #[derive(Clone, Debug, Default, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]

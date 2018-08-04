@@ -76,3 +76,12 @@ pub use self::travel::*;
 pub use self::undo::*;
 pub use self::update::*;
 pub use self::view::*;
+
+use activitystreams_traits::Activity;
+
+use self::properties::ActivityProperties;
+
+pub trait ActivityExt: Activity {
+    fn props(&self) -> &ActivityProperties;
+    fn props_mut(&mut self) -> &mut ActivityProperties;
+}

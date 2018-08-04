@@ -21,9 +21,10 @@ use activitystreams_traits::{Activity, Object};
 
 use super::{
     kind::ViewType,
-    properties::{ActivityExt, ActivityProperties, ViewProperties},
+    properties::{ActivityProperties, ViewProperties},
+    ActivityExt,
 };
-use object::properties::{ObjectExt, ObjectProperties};
+use object::{properties::ObjectProperties, ObjectExt};
 
 /// Indicates that the actor has viewed the object.
 #[derive(Clone, Debug, Default, Deserialize, Serialize, Properties)]

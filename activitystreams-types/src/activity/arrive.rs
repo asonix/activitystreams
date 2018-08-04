@@ -21,9 +21,10 @@ use activitystreams_traits::{Activity, IntransitiveActivity, Object};
 
 use super::{
     kind::ArriveType,
-    properties::{ActivityExt, ActivityProperties, ArriveProperties},
+    properties::{ActivityProperties, ArriveProperties},
+    ActivityExt,
 };
-use object::properties::{ObjectExt, ObjectProperties};
+use object::{properties::ObjectProperties, ObjectExt};
 
 /// An IntransitiveActivity that indicates that the actor has arrived at the location.
 ///

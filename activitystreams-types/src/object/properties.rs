@@ -56,11 +56,6 @@ use serde_json;
 
 use object::Image;
 
-pub trait ObjectExt {
-    fn props(&self) -> &ObjectProperties;
-    fn props_mut(&mut self) -> &mut ObjectProperties;
-}
-
 /// Alias chrono::DateTime<Utc> for use in derive macros
 pub type UtcTime = DateTime<Utc>;
 

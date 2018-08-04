@@ -21,9 +21,10 @@ use activitystreams_traits::{Activity, Object};
 
 use super::{
     kind::IgnoreType,
-    properties::{ActivityExt, ActivityProperties, IgnoreProperties},
+    properties::{ActivityProperties, IgnoreProperties},
+    ActivityExt,
 };
-use object::properties::{ObjectExt, ObjectProperties};
+use object::{properties::ObjectProperties, ObjectExt};
 
 /// Indicates that the actor is ignoring the object.
 ///

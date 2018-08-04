@@ -21,9 +21,10 @@ use activitystreams_traits::{Activity, IntransitiveActivity, Object};
 
 use super::{
     kind::QuestionType,
-    properties::{ActivityExt, ActivityProperties, QuestionProperties},
+    properties::{ActivityProperties, QuestionProperties},
+    ActivityExt,
 };
-use object::properties::{ObjectExt, ObjectProperties};
+use object::{properties::ObjectProperties, ObjectExt};
 
 /// Represents a question being asked.
 ///

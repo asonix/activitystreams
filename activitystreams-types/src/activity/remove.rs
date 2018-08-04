@@ -21,9 +21,10 @@ use activitystreams_traits::{Activity, Object};
 
 use super::{
     kind::RemoveType,
-    properties::{ActivityExt, ActivityProperties, RemoveProperties},
+    properties::{ActivityProperties, RemoveProperties},
+    ActivityExt,
 };
-use object::properties::{ObjectExt, ObjectProperties};
+use object::{properties::ObjectProperties, ObjectExt};
 
 /// Indicates that the actor is removing the object.
 ///

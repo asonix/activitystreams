@@ -21,7 +21,7 @@
 
 use activitystreams_traits::{Actor, Object};
 
-use object::properties::{ObjectExt, ObjectProperties};
+use object::{properties::ObjectProperties, ObjectExt};
 
 pub mod kind;
 use self::kind::*;

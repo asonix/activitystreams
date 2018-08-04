@@ -21,9 +21,10 @@ use activitystreams_traits::{Activity, Object};
 
 use super::{
     kind::DeleteType,
-    properties::{ActivityExt, ActivityProperties, DeleteProperties},
+    properties::{ActivityProperties, DeleteProperties},
+    ActivityExt,
 };
-use object::properties::{ObjectExt, ObjectProperties};
+use object::{properties::ObjectProperties, ObjectExt};
 
 /// Indicates that the actor has deleted the object.
 ///
