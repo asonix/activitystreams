@@ -1,6 +1,8 @@
 # ActivityStreams
 __A set of Traits and Types that make up the Activity Streams specification__
 
+# Attention! Find the most recent version of this project [here](https://git.asonix.dog/Aardwolf/activitystreams)
+
 - [Read the documentation on docs.rs](https://docs.rs/activitystreams)
 - [Find the crate on crates.io](https://crates.io/crates/activitystreams)
 - [Join the discussion on Matrix](https://matrix.to/#/!fAEcHyTUdAaKCzIKCt:asonix.dog?via=asonix.dog)
