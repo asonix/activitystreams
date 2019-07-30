@@ -1,6 +1,10 @@
 # ActivityStreams Derive
 __derive macros for ActivityStreams__
 
+- [Read the documentation on docs.rs](https://docs.rs/activitystreams-derive)
+- [Find the crate on crates.io](https://crates.io/crates/activitystreams-derive)
+- [Join the discussion on Matrix](https://matrix.to/#/!fAEcHyTUdAaKCzIKCt:asonix.dog?via=asonix.dog)
+
 ## Usage
 Add the required crates to your `Cargo.toml`
 ```toml

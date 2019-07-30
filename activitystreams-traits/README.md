@@ -1,6 +1,10 @@
 # ActivityStreams Traits
 __Traits for Activity Streams__
 
+- [Read the documentation on docs.rs](https://docs.rs/activitystreams-traits)
+- [Find the crate on crates.io](https://crates.io/crates/activitystreams-traits)
+- [Join the discussion on Matrix](https://matrix.to/#/!fAEcHyTUdAaKCzIKCt:asonix.dog?via=asonix.dog)
+
 These traits don't provide any functionality other than anotations for types created in other
 projects. See the `activitystreams-types` crate for examples of how these traits could be used.
 

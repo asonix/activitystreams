@@ -1,6 +1,10 @@
 # ActivityStreams Types
 __A base set of types from the Activity Streams specification.__
 
+- [Read the documentation on docs.rs](https://docs.rs/activitystreams-types)
+- [Find the crate on crates.io](https://crates.io/crates/activitystreams-types)
+- [Join the discussion on Matrix](https://matrix.to/#/!fAEcHyTUdAaKCzIKCt:asonix.dog?via=asonix.dog)
+
 ## Usage
 First, add the crate to your cargo.toml
 ```toml
